@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>KHALED ALMORSE // BACKEND_ENGINEER</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-container": "#2170e4",
+                        "on-primary-fixed": "#131b2e",
+                        "inverse-primary": "#bec6e0",
+                        "secondary": "#0058be",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#98805d",
+                        "outline": "#76777d",
+                        "on-secondary-fixed": "#001a42",
+                        "tertiary-fixed": "#fcdeb5",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "outline-variant": "#c6c6cd",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-surface": "#191c1e",
+                        "surface-dim": "#d8dadc",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary": "#000000",
+                        "secondary-fixed": "#d8e2ff",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#7c839b",
+                        "background": "#f7f9fb",
+                        "surface": "#f7f9fb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#fefcff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "primary-container": "#131b2e",
+                        "on-surface-variant": "#45464d",
+                        "surface-container": "#eceef0",
+                        "primary-fixed": "#dae2fd",
+                        "primary": "#000000",
+                        "surface-container-highest": "#e0e3e5",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "tertiary-container": "#271901",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f2f4f6",
+                        "on-secondary-fixed-variant": "#004395",
+                        "surface-tint": "#565e74",
+                        "on-tertiary-fixed": "#271901",
+                        "inverse-surface": "#2d3133",
+                        "on-background": "#191c1e",
+                        "primary-fixed-dim": "#bec6e0",
+                        "surface-container-high": "#e6e8ea"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.125rem",
+                        lg: "0.25rem",
+                        xl: "0.5rem",
+                        full: "0.75rem"
+                    },
+                    fontFamily: {
+                        headline: ["Inter"],
+                        body: ["Inter"],
+                        label: ["Inter"]
+                    }
+                }
+            }
+        };
+    </script>
+
+    <script>
+        (() => {
+            const savedTheme = localStorage.getItem("theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
+                document.documentElement.classList.add("dark");
+            }
+        })();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggleBtn = document.getElementById("theme-toggle");
+            const icon = document.getElementById("theme-icon");
+
+            const syncIcon = () => {
+                icon.textContent = document.documentElement.classList.contains("dark")
+                    ? "light_mode"
+                    : "dark_mode";
+            };
+
+            syncIcon();
+
+            toggleBtn.addEventListener("click", () => {
+                document.documentElement.classList.toggle("dark");
+                localStorage.setItem(
+                    "theme",
+                    document.documentElement.classList.contains("dark") ? "dark" : "light"
+                );
+                syncIcon();
+            });
+        });
+    </script>
+
+    <style>
+        * {
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .text-vertical {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-surface dark:bg-slate-950 font-body text-on-surface dark:text-slate-100 selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+
+    <!-- Top Navigation -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/40 dark:border-slate-700/40">
+        <div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto font-inter">
+            <div class="text-lg md:text-xl font-black tracking-tight text-slate-900 dark:text-slate-50">
+                Khaled<span class="text-blue-600 dark:text-blue-400">.</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about"
+                    class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">About</a>
+                <a href="#experience"
+                    class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Experience</a>
+                <a href="#projects"
+                    class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Projects</a>
+                <a href="#skills"
+                    class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Skills</a>
+                <a href="#contact"
+                    class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Contact</a>
+
+                <a href="#contact"
+                    class="bg-primary-container dark:bg-blue-600 text-on-primary px-6 py-2 rounded-lg text-sm font-bold tracking-widest hover:bg-secondary dark:hover:bg-blue-500 transition-all active:scale-95">
+                    Hire Me
+                </a>
+
+                <button id="theme-toggle"
+                    class="ml-2 p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition group">
+                    <span id="theme-icon" class="material-symbols-outlined text-lg group-hover:scale-110 transition">
+                        dark_mode
+                    </span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section
+            class="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden bg-surface dark:bg-slate-950"
+            id="hero">
+            <div class="absolute inset-0 z-0 pointer-events-none select-none">
+                <div
+                    class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-400/10 dark:bg-blue-500/10 rounded-full blur-[120px]">
+                </div>
+                <div
+                    class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-slate-300/20 dark:bg-slate-700/20 rounded-full blur-[120px]">
+                </div>
+
+                <div class="absolute -right-16 top-1/4 opacity-[0.02] dark:opacity-[0.04] rotate-6">
+                    <span class="material-symbols-outlined text-[45rem] text-slate-900 dark:text-white">terminal</span>
+                </div>
+            </div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-8 w-full grid lg:grid-cols-2 gap-16 xl:gap-24 items-center">
+                <div class="space-y-12 order-2 lg:order-1 text-center lg:text-left">
+                    <div class="space-y-6">
+                        <h1
+                            class="text-on-primary-fixed dark:text-white text-5xl md:text-7xl font-black tracking-tight leading-tight">
+                            Khaled <span class="text-secondary dark:text-blue-400">Almorse</span>
+                        </h1>
+
+                        <p
+                            class="text-on-surface-variant dark:text-slate-300 text-lg md:text-xl max-w-xl font-normal leading-relaxed mx-auto lg:mx-0 opacity-90">
+                            Passionate backend developer specializing in building secure, scalable, and high-performance
+                            RESTful APIs using
+                            <span class="text-on-surface dark:text-white font-bold">Node.js</span>,
+                            <span class="text-on-surface dark:text-white font-bold">Express.js</span>,
+                            and
+                            <span class="text-on-surface dark:text-white font-bold">MongoDB</span>.
+                        </p>
+
+                        <p
+                            class="text-on-surface-variant dark:text-slate-400 text-base md:text-lg max-w-xl leading-relaxed mx-auto lg:mx-0 opacity-80">
+                            Focused on clean architecture, authentication, authorization, middleware design, and
+                            performance optimization to deliver reliable backend systems for real-world applications.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#projects"
+                            class="group h-12 px-8 bg-primary-container dark:bg-blue-600 text-on-primary rounded-xl font-bold tracking-wide transition-all shadow-lg hover:shadow-secondary/20 hover:ring-2 hover:ring-secondary/50 dark:hover:ring-blue-400/40 active:scale-95 flex items-center gap-3">
+                            VIEW PROJECTS
+                            <span
+                                class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </a>
+
+                        <a href="https://drive.google.com/file/d/118cKMW2Qud4LYdNsQnQjn8zuOqTppFM4/view?usp=drive_link"
+                            class="h-12 px-8 border border-outline-variant dark:border-slate-700 text-on-surface dark:text-slate-100 rounded-xl font-bold tracking-wide hover:bg-surface-container-high dark:hover:bg-slate-800 transition-all active:scale-95 inline-flex items-center gap-2">
+                            <span class="material-symbols-outlined text-xl">download</span>
+                            DOWNLOAD CV
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative order-1 lg:order-2 flex justify-center lg:justify-end">
+                    <div class="relative">
+                        <div
+                            class="absolute -inset-6 bg-gradient-to-tr from-secondary/20 to-primary/10 dark:from-blue-500/20 dark:to-slate-700/20 rounded-[3rem] blur-2xl opacity-40">
+                        </div>
+
+                        <div
+                            class="relative p-6 bg-surface-container-high/80 dark:bg-slate-900/80 border border-white/10 dark:border-slate-700 rounded-[3rem] shadow-2xl backdrop-blur-sm">
+                            <img src="2.jpg" alt="Khaled Almorse"
+                                class="w-72 h-80 md:w-[400px] md:h-[500px] object-cover rounded-[2.5rem] border-2 border-surface-variant/50 dark:border-slate-700">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-on-surface-variant/40 dark:text-slate-500">
+                <span class="text-[9px] font-black tracking-[0.4em] uppercase">Scroll to explore</span>
+                <div class="w-[1px] h-14 bg-gradient-to-b from-secondary dark:from-blue-400 to-transparent"></div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="py-32 bg-surface-container-low dark:bg-slate-900" id="about">
+            <div class="max-w-7xl mx-auto px-8">
+                <div class="grid md:grid-cols-12 gap-16">
+                    <div class="md:col-span-4">
+                        <h2
+                            class="text-4xl font-black tracking-tighter text-on-primary-fixed dark:text-white uppercase border-l-8 border-secondary dark:border-blue-400 pl-6">
+                            About Me
+                        </h2>
+                    </div>
+
+                    <div class="md:col-span-8 space-y-8">
+                        <p class="text-2xl text-on-surface dark:text-slate-100 leading-snug font-light">
+                            I am a backend engineer driven by the philosophy of
+                            <span class="font-bold text-secondary dark:text-blue-400">Clean Architecture</span>.
+                            My work exists in the logic layer, where data integrity and system scalability define
+                            success.
+                            I specialize in building robust and scalable systems over solid foundations.
+                        </p>
+
+                        <div class="space-y-6 text-on-surface-variant dark:text-slate-300 mt-8">
+                            <div
+                                class="flex items-start gap-4 p-4 rounded-lg bg-surface dark:bg-slate-800 hover:bg-surface-container dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-700">
+                                <span
+                                    class="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl mt-1">dns</span>
+                                <div>
+                                    <h4 class="font-bold text-on-primary-fixed dark:text-white text-lg">Backend Focus
+                                    </h4>
+                                    <p class="leading-relaxed">Deep expertise in Node.js, Express, and MongoDB to
+                                        architect powerful backend services.</p>
+                                </div>
+                            </div>
+
+                            <div
+                                class="flex items-start gap-4 p-4 rounded-lg bg-surface dark:bg-slate-800 hover:bg-surface-container dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-700">
+                                <span
+                                    class="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl mt-1">api</span>
+                                <div>
+                                    <h4 class="font-bold text-on-primary-fixed dark:text-white text-lg">API Development
+                                        & Clean Architecture</h4>
+                                    <p class="leading-relaxed">Constructing scalable and decoupled RESTful endpoints
+                                        using proper design patterns.</p>
+                                </div>
+                            </div>
+
+                            <div
+                                class="flex items-start gap-4 p-4 rounded-lg bg-surface dark:bg-slate-800 hover:bg-surface-container dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-700">
+                                <span
+                                    class="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl mt-1">psychology</span>
+                                <div>
+                                    <h4 class="font-bold text-on-primary-fixed dark:text-white text-lg">Problem-Solving
+                                        Mindset</h4>
+                                    <p class="leading-relaxed">Methodical approach to debugging, optimizing algorithms,
+                                        and resolving critical bottlenecks.</p>
+                                </div>
+                            </div>
+
+                            <div
+                                class="flex items-start gap-4 p-4 rounded-lg bg-surface dark:bg-slate-800 hover:bg-surface-container dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-700">
+                                <span
+                                    class="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl mt-1">school</span>
+                                <div>
+                                    <h4 class="font-bold text-on-primary-fixed dark:text-white text-lg">Continuous
+                                        Learning</h4>
+                                    <p class="leading-relaxed">Graduated from an intensive 1100+ hour ITI training
+                                        program specialized in Open Source.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="py-32 bg-surface dark:bg-slate-950" id="experience">
+            <div class="max-w-7xl mx-auto px-8">
+                <div class="flex items-center gap-4 mb-16">
+                    <span class="h-px flex-grow bg-outline-variant dark:bg-slate-700"></span>
+                    <h2
+                        class="text-xs font-black tracking-[0.3em] uppercase text-on-surface-variant dark:text-slate-400">
+                        Engineering Experience
+                    </h2>
+                </div>
+
+                <div
+                    class="space-y-12 relative before:absolute before:left-[1.3rem] before:w-px before:h-full before:bg-outline-variant/30 dark:before:bg-slate-700/60 ml-2">
+                    <div class="relative pl-14">
+                        <div
+                            class="absolute left-[-4px] top-2 w-10 h-10 bg-secondary dark:bg-blue-500 rounded-full flex items-center justify-center shadow-lg border-4 border-surface dark:border-slate-950 z-10">
+                            <span
+                                class="material-symbols-outlined text-on-secondary text-sm">integration_instructions</span>
+                        </div>
+
+                        <div
+                            class="bg-surface-container-low dark:bg-slate-900 p-8 rounded-xl border border-outline-variant/20 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-on-primary-fixed dark:text-white">Open Source
+                                        Applications Development Trainee</h3>
+                                    <p class="text-lg text-secondary dark:text-blue-400 font-medium mt-1">Information
+                                        Technology Institute (ITI)</p>
+                                </div>
+                                <span
+                                    class="inline-block px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 rounded-full text-xs font-bold tracking-wider uppercase mt-4 md:mt-0">
+                                    2025 – Present
+                                </span>
+                            </div>
+
+                            <ul class="space-y-3 text-on-surface-variant dark:text-slate-300 mt-6 list-none">
+                                <li class="flex items-start gap-3">
+                                    <span
+                                        class="material-symbols-outlined text-secondary dark:text-blue-400 text-sm mt-1">check_circle</span>
+                                    <span>Built robust APIs featuring 10+ core endpoints following proper REST
+                                        principles.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span
+                                        class="material-symbols-outlined text-secondary dark:text-blue-400 text-sm mt-1">check_circle</span>
+                                    <span>Implemented complex Authentication and Authorization flows using modern JWT
+                                        methodologies.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span
+                                        class="material-symbols-outlined text-secondary dark:text-blue-400 text-sm mt-1">check_circle</span>
+                                    <span>Engineered performance optimizations, increasing throughput and minimizing
+                                        query execution time.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-14">
+                        <div
+                            class="absolute left-[-4px] top-2 w-10 h-10 bg-surface-container-high dark:bg-slate-800 rounded-full flex items-center justify-center shadow-lg border-4 border-surface dark:border-slate-950 z-10">
+                            <span
+                                class="material-symbols-outlined text-on-surface-variant dark:text-slate-300 text-sm">terminal</span>
+                        </div>
+
+                        <div
+                            class="bg-surface-container-lowest dark:bg-slate-900/70 p-8 rounded-xl border border-outline-variant/20 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-on-primary-fixed dark:text-white">Backend
+                                        Developer Trainee</h3>
+                                    <p class="text-lg text-secondary dark:text-blue-400 font-medium mt-1">Information
+                                        Technology Institute (ITI)</p>
+                                </div>
+                                <span
+                                    class="inline-block px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface-variant dark:text-slate-300 rounded-full text-xs font-bold tracking-wider uppercase mt-4 md:mt-0">
+                                    2024
+                                </span>
+                            </div>
+
+                            <ul class="space-y-3 text-on-surface-variant dark:text-slate-300 mt-6 list-none">
+                                <li class="flex items-start gap-3">
+                                    <span
+                                        class="material-symbols-outlined text-outline-variant dark:text-slate-400 text-sm mt-1">check_circle</span>
+                                    <span>Gained early specialization in scalable systems and database
+                                        architecture.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span
+                                        class="material-symbols-outlined text-outline-variant dark:text-slate-400 text-sm mt-1">check_circle</span>
+                                    <span>Applied Clean Architecture principles to prototype and execute
+                                        production-level code.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="py-32 bg-surface-container-low dark:bg-slate-900" id="projects">
+            <div class="max-w-7xl mx-auto px-8">
+                <div class="mb-16">
+                    <h2 class="text-5xl font-black tracking-tighter text-on-primary-fixed dark:text-white">LATEST
+                        DEPLOYMENTS.</h2>
+                    <p class="text-on-surface-variant dark:text-slate-400 mt-2 font-medium">Functional logic over
+                        aesthetic noise.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div
+                        class="bg-surface-container-lowest dark:bg-slate-950/70 p-8 rounded-lg shadow-sm border border-outline-variant/10 dark:border-slate-700 flex flex-col h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="flex justify-between items-start mb-6">
+                            <span
+                                class="material-symbols-outlined text-secondary dark:text-blue-400 text-4xl">dataset</span>
+                            <a class="text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400"
+                                href="#"><span class="material-symbols-outlined">open_in_new</span></a>
+                        </div>
+                        <h3 class="text-2xl font-bold text-on-primary-fixed dark:text-white mb-4">ASD Final Project</h3>
+                        <div class="space-y-4 flex-grow">
+                            <div>
+                                <p
+                                    class="text-[10px] font-black tracking-widest text-on-surface-variant dark:text-slate-400 uppercase mb-1">
+                                    The Problem</p>
+                                <p class="text-sm text-on-surface dark:text-slate-200 leading-snug">Complex data
+                                    relations requiring secure middleware-driven handling.</p>
+                            </div>
+                            <div>
+                                <p
+                                    class="text-[10px] font-black tracking-widest text-on-surface-variant dark:text-slate-400 uppercase mb-1">
+                                    The Solution</p>
+                                <p class="text-sm text-on-surface dark:text-slate-200 leading-snug">10+ specialized API
+                                    endpoints using Clean Architecture & RBAC.</p>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-outline-variant/10 dark:border-slate-700">
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">NODE.JS</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">EXPRESS</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">MVC</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-surface-container-lowest dark:bg-slate-950/70 p-8 rounded-lg shadow-sm border border-outline-variant/10 dark:border-slate-700 flex flex-col h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="flex justify-between items-start mb-6">
+                            <span
+                                class="material-symbols-outlined text-secondary dark:text-blue-400 text-4xl">shopping_cart</span>
+                            <a class="text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400"
+                                href="#"><span class="material-symbols-outlined">open_in_new</span></a>
+                        </div>
+                        <h3 class="text-2xl font-bold text-on-primary-fixed dark:text-white mb-4">E-commerce API V2</h3>
+                        <div class="space-y-4 flex-grow">
+                            <div>
+                                <p
+                                    class="text-[10px] font-black tracking-widest text-on-surface-variant dark:text-slate-400 uppercase mb-1">
+                                    The Impact</p>
+                                <p class="text-sm text-on-surface dark:text-slate-200 leading-snug">Reduced query load
+                                    by 40% through pagination and advanced filtering.</p>
+                            </div>
+                            <div>
+                                <p
+                                    class="text-[10px] font-black tracking-widest text-on-surface-variant dark:text-slate-400 uppercase mb-1">
+                                    Core Tech</p>
+                                <p class="text-sm text-on-surface dark:text-slate-200 leading-snug">Secure Auth
+                                    implementation for high-volume transactions.</p>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-outline-variant/10 dark:border-slate-700">
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">MONGODB</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">JWT</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">REST</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-surface-container-lowest dark:bg-slate-950/70 p-8 rounded-lg shadow-sm border border-outline-variant/10 dark:border-slate-700 flex flex-col h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="flex justify-between items-start mb-6">
+                            <span
+                                class="material-symbols-outlined text-secondary dark:text-blue-400 text-4xl">apartment</span>
+                            <a class="text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400"
+                                href="#"><span class="material-symbols-outlined">open_in_new</span></a>
+                        </div>
+                        <h3 class="text-2xl font-bold text-on-primary-fixed dark:text-white mb-4">Hotel Booking API</h3>
+                        <div class="space-y-4 flex-grow">
+                            <div>
+                                <p
+                                    class="text-[10px] font-black tracking-widest text-on-surface-variant dark:text-slate-400 uppercase mb-1">
+                                    Security</p>
+                                <p class="text-sm text-on-surface dark:text-slate-200 leading-snug">Role-Based Access
+                                    Control (RBAC) ensuring data isolation.</p>
+                            </div>
+                            <div>
+                                <p
+                                    class="text-[10px] font-black tracking-widest text-on-surface-variant dark:text-slate-400 uppercase mb-1">
+                                    Architecture</p>
+                                <p class="text-sm text-on-surface dark:text-slate-200 leading-snug">Optimized DB queries
+                                    using aggregation pipelines for real-time availability.</p>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-outline-variant/10 dark:border-slate-700">
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">MYSQL</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">AUTHZ</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">QUERIES</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="py-32 bg-surface dark:bg-slate-950" id="skills">
+            <div class="max-w-7xl mx-auto px-8">
+
+                <!-- Section Header -->
+                <div class="mb-16">
+                    <h2 class="text-4xl md:text-5xl font-black tracking-tight text-on-primary-fixed dark:text-white">
+                        Skills
+                    </h2>
+
+                </div>
+
+                <!-- Skills Grid -->
+                <div class="grid md:grid-cols-3 gap-12">
+
+                    <!-- Backend & Database -->
+                    <div>
+                        <div class="flex items-center gap-3 mb-8">
+                            <span class="material-symbols-outlined text-secondary dark:text-blue-400">database</span>
+                            <h3 class="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
+                                Backend & Database
+                            </h3>
+                        </div>
+
+                        <div class="flex flex-wrap gap-3">
+                            <span
+                                class="px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
+                                Node.js
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
+                                Express.js
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
+                                REST APIs
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                MongoDB
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                MySQL
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Core Concepts -->
+                    <div>
+                        <div class="flex items-center gap-3 mb-8">
+                            <span class="material-symbols-outlined text-secondary dark:text-blue-400">settings</span>
+                            <h3 class="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
+                                Core Concepts
+                            </h3>
+                        </div>
+
+                        <div class="flex flex-wrap gap-3">
+                            <span
+                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                API Security
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                Authentication & Authorization
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                Middleware Design
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                Clean Code / MVC
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                Performance Optimization
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                Pagination & Filtering
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Tools & Soft Skills -->
+                    <div>
+                        <div class="flex items-center gap-3 mb-8">
+                            <span
+                                class="material-symbols-outlined text-secondary dark:text-blue-400">construction</span>
+                            <h3 class="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
+                                Tools & Soft Skills
+                            </h3>
+                        </div>
+
+                        <div class="flex flex-wrap gap-3">
+                            <span
+                                class="px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                Git & GitHub
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                Postman
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                Linux
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                Problem Solving
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                Teamwork
+                            </span>
+                            <span
+                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                Communication
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="py-32 bg-surface-container-low dark:bg-slate-900 overflow-hidden relative" id="education">
+            <div class="absolute inset-0 opacity-40 dark:opacity-10 pointer-events-none">
+                <div class="grid grid-cols-6 h-full w-full">
+                    <div class="border-r border-outline-variant/20 dark:border-slate-700/40"></div>
+                    <div class="border-r border-outline-variant/20 dark:border-slate-700/40"></div>
+                    <div class="border-r border-outline-variant/20 dark:border-slate-700/40"></div>
+                    <div class="border-r border-outline-variant/20 dark:border-slate-700/40"></div>
+                    <div class="border-r border-outline-variant/20 dark:border-slate-700/40"></div>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-8 relative z-10">
+                <div class="grid md:grid-cols-2 items-center gap-16">
+
+                    <!-- Left Content -->
+                    <div>
+                        <h2
+                            class="text-4xl md:text-5xl font-black tracking-tight uppercase text-secondary dark:text-blue-400 mb-6">
+                            Education
+                        </h2>
+
+                        <h3 class="text-4xl md:text-5xl font-black mb-4 text-on-primary-fixed dark:text-white">
+                            Suez Canal University
+                        </h3>
+
+                        <p class="text-lg text-on-surface-variant dark:text-slate-300 font-medium mb-4">
+                            Bachelor of Computer Science — 2024
+                        </p>
+
+                        <p class="text-lg text-on-surface-variant dark:text-slate-300 leading-relaxed mb-6">
+                            Graduated with
+                            <span class="text-on-surface dark:text-white font-bold">Excellent (87%)</span>,
+                            with a strong foundation in software engineering, data structures, and backend development.
+                        </p>
+
+                        <div class="flex flex-wrap gap-3">
+                            <span
+                                class="px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
+                                Data Structures
+                            </span>
+                            <span
+                                class="px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
+                                Databases
+                            </span>
+                            <span
+                                class="px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
+                                Software Engineering
+                            </span>
+                            <span
+                                class="px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
+                                Web Development
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Right Card -->
+                    <div
+                        class="bg-white dark:bg-slate-800/60 p-12 rounded-2xl border border-outline-variant/20 dark:border-slate-700 text-center shadow-sm dark:shadow-none">
+                        <div class="text-6xl font-black text-secondary dark:text-blue-400 mb-2">87%</div>
+
+                        <div
+                            class="text-sm font-bold tracking-widest text-on-surface-variant dark:text-slate-300 uppercase">
+                            Final Grade
+                        </div>
+
+                        <div class="mt-8 flex justify-center">
+                            <span
+                                class="material-symbols-outlined text-6xl opacity-40 text-on-primary-fixed dark:text-slate-300">
+                                school
+                            </span>
+                        </div>
+
+                        <p class="mt-6 text-sm text-on-surface-variant dark:text-slate-400 opacity-80">
+                            Strong academic performance with focus on backend systems and problem solving.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="py-32 bg-surface dark:bg-slate-950 relative overflow-hidden" id="contact">
+            <div class="max-w-7xl mx-auto px-8 relative z-10">
+                <div class="text-center mb-20">
+                    <h2
+                        class="text-5xl md:text-8xl font-black tracking-tighter text-on-primary-fixed dark:text-white mb-6 uppercase italic">
+                        GET_IN_TOUCH<span class="animate-pulse text-secondary dark:text-blue-400">_</span>
+                    </h2>
+                    <p
+                        class="text-lg md:text-xl text-on-surface-variant dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium">
+                        Interested in backend development, RESTful APIs, or collaboration opportunities? Let’s connect
+                        and build something impactful.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                    <a href="mailto:khaledelmorsemanea@gmail.com"
+                        class="group relative p-8 bg-surface-container dark:bg-slate-900 rounded-xl border border-outline-variant/20 dark:border-slate-700 hover:border-secondary dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex flex-col items-center text-center gap-4">
+                            <div
+                                class="w-14 h-14 rounded-full bg-surface-container-highest dark:bg-slate-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <span
+                                    class="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">mail</span>
+                            </div>
+                            <div>
+                                <p
+                                    class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant dark:text-slate-400 mb-1">
+                                    Email</p>
+                                <p
+                                    class="font-bold text-on-surface dark:text-slate-100 group-hover:text-secondary dark:group-hover:text-blue-400 transition-colors break-all">
+                                    khaledelmorsemanea@gmail.com
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="tel:01098101014"
+                        class="group relative p-8 bg-surface-container dark:bg-slate-900 rounded-xl border border-outline-variant/20 dark:border-slate-700 hover:border-secondary dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex flex-col items-center text-center gap-4">
+                            <div
+                                class="w-14 h-14 rounded-full bg-surface-container-highest dark:bg-slate-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <span
+                                    class="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">call</span>
+                            </div>
+                            <div>
+                                <p
+                                    class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant dark:text-slate-400 mb-1">
+                                    Phone</p>
+                                <p
+                                    class="font-bold text-on-surface dark:text-slate-100 group-hover:text-secondary dark:group-hover:text-blue-400 transition-colors">
+                                    01098101014
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/KhaledAlmorse" target="_blank"
+                        class="group relative p-8 bg-surface-container dark:bg-slate-900 rounded-xl border border-outline-variant/20 dark:border-slate-700 hover:border-secondary dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex flex-col items-center text-center gap-4">
+                            <div
+                                class="w-14 h-14 rounded-full bg-surface-container-highest dark:bg-slate-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <span
+                                    class="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">code</span>
+                            </div>
+                            <div>
+                                <p
+                                    class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant dark:text-slate-400 mb-1">
+                                    GitHub</p>
+                                <p
+                                    class="font-bold text-on-surface dark:text-slate-100 group-hover:text-secondary dark:group-hover:text-blue-400 transition-colors break-all">
+                                    github.com/KhaledAlmorse
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="https://linkedin.com/in/khaled-elmorse-manea" target="_blank"
+                        class="group relative p-8 bg-surface-container dark:bg-slate-900 rounded-xl border border-outline-variant/20 dark:border-slate-700 hover:border-secondary dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex flex-col items-center text-center gap-4">
+                            <div
+                                class="w-14 h-14 rounded-full bg-surface-container-highest dark:bg-slate-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <span
+                                    class="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">person</span>
+                            </div>
+                            <div>
+                                <p
+                                    class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant dark:text-slate-400 mb-1">
+                                    LinkedIn</p>
+                                <p
+                                    class="font-bold text-on-surface dark:text-slate-100 group-hover:text-secondary dark:group-hover:text-blue-400 transition-colors break-all">
+                                    linkedin.com/in/khaled-elmorse-manea
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+        class="w-full bg-surface-container-lowest dark:bg-slate-900 border-t border-outline-variant/10 dark:border-slate-700">
+        <div class="max-w-7xl mx-auto px-8 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
+                <div class="flex flex-col gap-1">
+                    <span class="font-black text-2xl tracking-tighter text-on-primary-fixed dark:text-white uppercase">
+                        Khaled Almorse
+                    </span>
+                    <p class="text-on-surface-variant dark:text-slate-400 text-sm italic opacity-80">
+                        Backend Developer specialized in Node.js, Express.js, and MongoDB.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-8">
+                    <a class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 transition-all group"
+                        href="https://github.com/KhaledAlmorse" target="_blank" rel="noopener noreferrer">
+                        <span class="material-symbols-outlined text-lg opacity-50 group-hover:opacity-100">code</span>
+                        GitHub
+                    </a>
+
+                    <a class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 transition-all group"
+                        href="https://linkedin.com/in/khaled-elmorse-manea" target="_blank" rel="noopener noreferrer">
+                        <span class="material-symbols-outlined text-lg opacity-50 group-hover:opacity-100">person</span>
+                        LinkedIn
+                    </a>
+
+                    <a class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 transition-all group"
+                        href="mailto:khaledelmorsemanea@gmail.com">
+                        <span class="material-symbols-outlined text-lg opacity-50 group-hover:opacity-100">mail</span>
+                        Email
+                    </a>
+                </div>
+
+                <div class="flex flex-col items-center md:items-end gap-4">
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});"
+                        class="bg-surface-container dark:bg-slate-800 hover:bg-surface-container-highest dark:hover:bg-slate-700 text-on-surface-variant dark:text-slate-300 hover:text-secondary dark:hover:text-blue-400 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300">
+                        <span class="material-symbols-outlined">arrow_upward</span>
+                    </button>
+
+                    <div
+                        class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant dark:text-slate-500 opacity-50">
+                        © 2026 Khaled Almorse. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

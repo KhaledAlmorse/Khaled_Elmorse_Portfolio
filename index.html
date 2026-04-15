@@ -85,89 +85,16 @@
         };
     </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const html = document.documentElement;
+    <script src="main.js"></script>
 
-            const desktopThemeBtn = document.getElementById("theme-toggle");
-            const desktopThemeIcon = document.getElementById("theme-icon");
-
-            const mobileThemeBtn = document.getElementById("theme-toggle-mobile");
-            const mobileThemeIcon = document.getElementById("theme-icon-mobile");
-
-            const mobileMenuBtn = document.getElementById("mobile-menu-button");
-            const mobileMenu = document.getElementById("mobile-menu");
-            const mobileMenuIcon = document.getElementById("mobile-menu-icon");
-
-            const syncThemeIcons = () => {
-                const isDark = html.classList.contains("dark");
-                if (desktopThemeIcon) desktopThemeIcon.textContent = isDark ? "light_mode" : "dark_mode";
-                if (mobileThemeIcon) mobileThemeIcon.textContent = isDark ? "light_mode" : "dark_mode";
-            };
-
-            const toggleTheme = () => {
-                html.classList.toggle("dark");
-                localStorage.setItem("theme", html.classList.contains("dark") ? "dark" : "light");
-                syncThemeIcons();
-            };
-
-            if (desktopThemeBtn) desktopThemeBtn.addEventListener("click", toggleTheme);
-            if (mobileThemeBtn) mobileThemeBtn.addEventListener("click", toggleTheme);
-
-            syncThemeIcons();
-
-            if (mobileMenuBtn && mobileMenu && mobileMenuIcon) {
-                mobileMenuBtn.addEventListener("click", () => {
-                    mobileMenu.classList.toggle("hidden");
-                    const isOpen = !mobileMenu.classList.contains("hidden");
-                    mobileMenuIcon.textContent = isOpen ? "close" : "menu";
-                });
-
-                document.addEventListener("click", (e) => {
-                    const isInsideMenu = mobileMenu.contains(e.target);
-                    const isButton = mobileMenuBtn.contains(e.target);
-                    if (!isInsideMenu && !isButton) {
-                        mobileMenu.classList.add("hidden");
-                        mobileMenuIcon.textContent = "menu";
-                    }
-                });
-
-                const mobileLinks = mobileMenu.querySelectorAll("a");
-                mobileLinks.forEach(link => {
-                    link.addEventListener("click", () => {
-                        mobileMenu.classList.add("hidden");
-                        mobileMenuIcon.textContent = "menu";
-                    });
-                });
-            }
-        });
-    </script>
-
-    <style>
-        * {
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        .text-vertical {
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body
     class="bg-surface dark:bg-slate-950 font-body text-on-surface dark:text-slate-100 selection:bg-secondary-fixed selection:text-on-secondary-fixed">
 
+    <!-- Scroll progress bar (new — zero impact on layout) -->
+    <div id="scroll-progress" aria-hidden="true"></div>
 
     <!-- Top Navigation -->
     <nav
@@ -179,18 +106,18 @@
                 Khaled<span class="text-blue-600 dark:text-blue-400">.</span>
             </div>
 
-            <!-- Desktop Navigation -->
+            <!-- Desktop Navigation — added nav-link class to each anchor -->
             <div class="hidden md:flex items-center gap-8 text-sm font-medium">
                 <a href="#about"
-                    class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">About</a>
+                    class="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">About</a>
                 <a href="#experience"
-                    class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Experience</a>
+                    class="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Experience</a>
                 <a href="#projects"
-                    class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Projects</a>
+                    class="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Projects</a>
                 <a href="#skills"
-                    class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Skills</a>
+                    class="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Skills</a>
                 <a href="#contact"
-                    class="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Contact</a>
+                    class="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Contact</a>
 
                 <button id="theme-toggle"
                     class="ml-2 p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition group">
@@ -250,6 +177,10 @@
         <section
             class="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden bg-surface dark:bg-slate-950"
             id="hero">
+
+            <!-- Particle canvas (new — position absolute, pointer-events none) -->
+            <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
             <div class="absolute inset-0 z-0 pointer-events-none select-none">
                 <div
                     class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-400/10 dark:bg-blue-500/10 rounded-full blur-[120px]">
@@ -266,49 +197,54 @@
             <div class="relative z-10 max-w-7xl mx-auto px-8 w-full grid lg:grid-cols-2 gap-16 xl:gap-24 items-center">
                 <div class="space-y-12 order-2 lg:order-1 text-center lg:text-left">
                     <div class="space-y-6">
+                        <!-- Added hero-title class for entrance animation -->
                         <h1
-                            class="text-on-primary-fixed dark:text-white text-5xl md:text-7xl font-black tracking-tight leading-tight">
+                            class="hero-title text-on-primary-fixed dark:text-white text-5xl md:text-7xl font-black tracking-tight leading-tight">
                             Khaled <span class="text-secondary dark:text-blue-400">Almorse</span>
                         </h1>
 
+                        <!-- Added hero-desc and typing-cursor classes -->
                         <p
-                            class="text-on-surface-variant dark:text-slate-300 text-lg md:text-xl max-w-xl font-normal leading-relaxed mx-auto lg:mx-0 opacity-90">
+                            class="hero-desc text-on-surface-variant dark:text-slate-300 text-lg md:text-xl max-w-xl font-normal leading-relaxed mx-auto lg:mx-0 opacity-90">
 
                             Passionate
                             <span class="font-bold text-secondary dark:text-blue-400 text-xl md:text-2xl">
                                 backend developer
                             </span>
-                            specializing in building secure, scalable, and high-performance RESTful APIs using
+                            <br> specializing in building secure, scalable, and high-performance RESTful APIs using
                             <span class="text-on-surface dark:text-white font-bold">Node.js</span>,
                             <span class="text-on-surface dark:text-white font-bold">Express.js</span>,
                             and
                             <span class="text-on-surface dark:text-white font-bold">MongoDB</span>.
                         </p>
+                        <!-- Added hero-sub class -->
                         <p
-                            class="text-on-surface-variant dark:text-slate-400 text-base md:text-lg max-w-xl leading-relaxed mx-auto lg:mx-0 opacity-80">
+                            class="hero-sub text-on-surface-variant dark:text-slate-400 text-base md:text-lg max-w-xl leading-relaxed mx-auto lg:mx-0 opacity-80">
                             Focused on clean architecture, authentication, authorization, middleware design, and
                             performance optimization to deliver reliable backend systems for real-world applications.
                         </p>
                     </div>
 
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
+                    <!-- Added hero-btns class -->
+                    <div class="hero-btns flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
                         <a href="#projects"
-                            class="group h-12 px-8 bg-primary-container dark:bg-blue-600 text-on-primary rounded-xl font-bold tracking-wide transition-all shadow-lg hover:shadow-secondary/20 hover:ring-2 hover:ring-secondary/50 dark:hover:ring-blue-400/40 active:scale-95 flex items-center gap-3">
+                            class="btn-ripple group h-12 px-8 bg-primary-container dark:bg-blue-600 text-on-primary rounded-xl font-bold tracking-wide transition-all shadow-lg hover:shadow-secondary/20 hover:ring-2 hover:ring-secondary/50 dark:hover:ring-blue-400/40 active:scale-95 flex items-center gap-3">
                             VIEW PROJECTS
                             <span
                                 class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                         </a>
 
                         <a href="https://drive.google.com/file/d/118cKMW2Qud4LYdNsQnQjn8zuOqTppFM4/view?usp=drive_link"
-                            class="h-12 px-8 border border-outline-variant dark:border-slate-700 text-on-surface dark:text-slate-100 rounded-xl font-bold tracking-wide hover:bg-surface-container-high dark:hover:bg-slate-800 transition-all active:scale-95 inline-flex items-center gap-2">
+                            class="btn-ripple h-12 px-8 border border-outline-variant dark:border-slate-700 text-on-surface dark:text-slate-100 rounded-xl font-bold tracking-wide hover:bg-surface-container-high dark:hover:bg-slate-800 transition-all active:scale-95 inline-flex items-center gap-2">
                             <span class="material-symbols-outlined text-xl">download</span>
                             DOWNLOAD CV
                         </a>
                     </div>
                 </div>
 
-                <div class="relative order-1 lg:order-2 flex justify-center lg:justify-end">
-                    <div class="relative">
+                <!-- Added hero-image class for entrance, hero-image-inner for float -->
+                <div class="relative order-1 lg:order-2 flex justify-center lg:justify-end hero-image">
+                    <div class="relative hero-image-inner">
                         <div
                             class="absolute -inset-6 bg-gradient-to-tr from-secondary/20 to-primary/10 dark:from-blue-500/20 dark:to-slate-700/20 rounded-[3rem] blur-2xl opacity-40">
                         </div>
@@ -322,18 +258,19 @@
                 </div>
             </div>
 
+            <!-- Added scroll-cue class -->
             <div
-                class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-on-surface-variant/40 dark:text-slate-500">
+                class="scroll-cue absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-on-surface-variant/40 dark:text-slate-500">
                 <span class="text-[9px] font-black tracking-[0.4em] uppercase">Scroll to explore</span>
                 <div class="w-[1px] h-14 bg-gradient-to-b from-secondary dark:from-blue-400 to-transparent"></div>
             </div>
         </section>
 
-        <!-- About -->
+        <!-- About — reveal + stagger added -->
         <section class="py-32 bg-surface-container-low dark:bg-slate-900" id="about">
             <div class="max-w-7xl mx-auto px-8">
                 <div class="grid md:grid-cols-12 gap-16">
-                    <div class="md:col-span-4">
+                    <div class="md:col-span-4 reveal-left">
                         <h2
                             class="text-4xl font-black tracking-tighter text-on-primary-fixed dark:text-white uppercase border-l-8 border-secondary dark:border-blue-400 pl-6">
                             About Me
@@ -341,7 +278,7 @@
                     </div>
 
                     <div class="md:col-span-8 space-y-8">
-                        <p class="text-2xl text-on-surface dark:text-slate-100 leading-snug font-light">
+                        <p class="reveal text-2xl text-on-surface dark:text-slate-100 leading-snug font-light">
                             I am a backend engineer driven by the philosophy of
                             <span class="font-bold text-secondary dark:text-blue-400">Clean Architecture</span>.
                             My work exists in the logic layer, where data integrity and system scalability define
@@ -349,9 +286,10 @@
                             I specialize in building robust and scalable systems over solid foundations.
                         </p>
 
-                        <div class="space-y-6 text-on-surface-variant dark:text-slate-300 mt-8">
+                        <!-- Added stagger-children to the about items container -->
+                        <div class="stagger-children space-y-6 text-on-surface-variant dark:text-slate-300 mt-8">
                             <div
-                                class="flex items-start gap-4 p-4 rounded-lg bg-surface dark:bg-slate-800 hover:bg-surface-container dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-700">
+                                class="about-item flex items-start gap-4 p-4 rounded-lg bg-surface dark:bg-slate-800 hover:bg-surface-container dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-700">
                                 <span
                                     class="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl mt-1">dns</span>
                                 <div>
@@ -363,7 +301,7 @@
                             </div>
 
                             <div
-                                class="flex items-start gap-4 p-4 rounded-lg bg-surface dark:bg-slate-800 hover:bg-surface-container dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-700">
+                                class="about-item flex items-start gap-4 p-4 rounded-lg bg-surface dark:bg-slate-800 hover:bg-surface-container dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-700">
                                 <span
                                     class="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl mt-1">api</span>
                                 <div>
@@ -375,7 +313,7 @@
                             </div>
 
                             <div
-                                class="flex items-start gap-4 p-4 rounded-lg bg-surface dark:bg-slate-800 hover:bg-surface-container dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-700">
+                                class="about-item flex items-start gap-4 p-4 rounded-lg bg-surface dark:bg-slate-800 hover:bg-surface-container dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-700">
                                 <span
                                     class="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl mt-1">psychology</span>
                                 <div>
@@ -387,7 +325,7 @@
                             </div>
 
                             <div
-                                class="flex items-start gap-4 p-4 rounded-lg bg-surface dark:bg-slate-800 hover:bg-surface-container dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-700">
+                                class="about-item flex items-start gap-4 p-4 rounded-lg bg-surface dark:bg-slate-800 hover:bg-surface-container dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-700">
                                 <span
                                     class="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl mt-1">school</span>
                                 <div>
@@ -403,11 +341,11 @@
             </div>
         </section>
 
-        <!-- Experience -->
+        <!-- Experience — reveal added -->
         <section class="py-32 bg-surface dark:bg-slate-950" id="experience">
             <div class="max-w-7xl mx-auto px-8">
 
-                <div class="mb-16">
+                <div class="mb-16 reveal">
                     <h2 class="text-5xl font-black tracking-tighter text-on-primary-fixed dark:text-white">
                         EDUCATION
                     </h2>
@@ -415,15 +353,17 @@
 
                 <div
                     class="space-y-12 relative before:absolute before:left-[1.3rem] before:w-px before:h-full before:bg-outline-variant/30 dark:before:bg-slate-700/60 ml-2">
-                    <div class="relative pl-14">
+                    <!-- Added edu-card-featured + reveal classes -->
+                    <div class="relative pl-14 reveal">
+                        <!-- Added timeline-dot class -->
                         <div
-                            class="absolute left-[-4px] top-2 w-10 h-10 bg-secondary dark:bg-blue-500 rounded-full flex items-center justify-center shadow-lg border-4 border-surface dark:border-slate-950 z-10">
+                            class="timeline-dot absolute left-[-4px] top-2 w-10 h-10 bg-secondary dark:bg-blue-500 rounded-full flex items-center justify-center shadow-lg border-4 border-surface dark:border-slate-950 z-10">
                             <span
                                 class="material-symbols-outlined text-on-secondary text-sm">integration_instructions</span>
                         </div>
 
                         <div
-                            class="bg-surface-container-low dark:bg-slate-900 p-8 rounded-xl border border-outline-variant/20 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+                            class="edu-card-featured bg-surface-container-low dark:bg-slate-900 p-8 rounded-xl border border-outline-variant/20 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
                             <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
                                 <div>
                                     <h3 class="text-2xl font-bold text-on-primary-fixed dark:text-white">Open Source
@@ -460,7 +400,7 @@
                         </div>
                     </div>
 
-                    <div class="relative pl-14">
+                    <div class="relative pl-14 reveal" style="transition-delay: 0.15s;">
                         <div
                             class="absolute left-[-4px] top-2 w-10 h-10 bg-surface-container-high dark:bg-slate-800 rounded-full flex items-center justify-center shadow-lg border-4 border-surface dark:border-slate-950 z-10">
                             <span
@@ -502,18 +442,19 @@
             </div>
         </section>
 
-        <!-- Projects -->
+        <!-- Projects — reveal + tilt-card added -->
         <section class="py-32 bg-surface-container-low dark:bg-slate-900" id="projects">
             <div class="max-w-7xl mx-auto px-8">
-                <div class="mb-16">
+                <div class="mb-16 reveal">
                     <h2 class="text-5xl font-black tracking-tighter text-on-primary-fixed dark:text-white">
                         Projects</h2>
-
                 </div>
 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Added stagger-children to project grid -->
+                <div class="stagger-children grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Added tilt-card class to each project card -->
                     <div
-                        class="bg-surface-container-lowest dark:bg-slate-950/70 p-8 rounded-lg shadow-sm border border-outline-variant/10 dark:border-slate-700 flex flex-col h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        class="tilt-card bg-surface-container-lowest dark:bg-slate-950/70 p-8 rounded-lg shadow-sm border border-outline-variant/10 dark:border-slate-700 flex flex-col h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                         <div class="flex justify-between items-start mb-6">
                             <span
                                 class="material-symbols-outlined text-secondary dark:text-blue-400 text-4xl">dataset</span>
@@ -540,17 +481,17 @@
                         <div class="mt-8 pt-6 border-t border-outline-variant/10 dark:border-slate-700">
                             <div class="flex flex-wrap gap-2">
                                 <span
-                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">NODE.JS</span>
+                                    class="skill-tag px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">NODE.JS</span>
                                 <span
-                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">EXPRESS</span>
+                                    class="skill-tag px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">EXPRESS</span>
                                 <span
-                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">MVC</span>
+                                    class="skill-tag px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">MVC</span>
                             </div>
                         </div>
                     </div>
 
                     <div
-                        class="bg-surface-container-lowest dark:bg-slate-950/70 p-8 rounded-lg shadow-sm border border-outline-variant/10 dark:border-slate-700 flex flex-col h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        class="tilt-card bg-surface-container-lowest dark:bg-slate-950/70 p-8 rounded-lg shadow-sm border border-outline-variant/10 dark:border-slate-700 flex flex-col h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                         <div class="flex justify-between items-start mb-6">
                             <span
                                 class="material-symbols-outlined text-secondary dark:text-blue-400 text-4xl">shopping_cart</span>
@@ -577,17 +518,17 @@
                         <div class="mt-8 pt-6 border-t border-outline-variant/10 dark:border-slate-700">
                             <div class="flex flex-wrap gap-2">
                                 <span
-                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">MONGODB</span>
+                                    class="skill-tag px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">MONGODB</span>
                                 <span
-                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">JWT</span>
+                                    class="skill-tag px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">JWT</span>
                                 <span
-                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">REST</span>
+                                    class="skill-tag px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">REST</span>
                             </div>
                         </div>
                     </div>
 
                     <div
-                        class="bg-surface-container-lowest dark:bg-slate-950/70 p-8 rounded-lg shadow-sm border border-outline-variant/10 dark:border-slate-700 flex flex-col h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        class="tilt-card bg-surface-container-lowest dark:bg-slate-950/70 p-8 rounded-lg shadow-sm border border-outline-variant/10 dark:border-slate-700 flex flex-col h-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                         <div class="flex justify-between items-start mb-6">
                             <span
                                 class="material-symbols-outlined text-secondary dark:text-blue-400 text-4xl">apartment</span>
@@ -614,11 +555,11 @@
                         <div class="mt-8 pt-6 border-t border-outline-variant/10 dark:border-slate-700">
                             <div class="flex flex-wrap gap-2">
                                 <span
-                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">MYSQL</span>
+                                    class="skill-tag px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">MYSQL</span>
                                 <span
-                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">AUTHZ</span>
+                                    class="skill-tag px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">AUTHZ</span>
                                 <span
-                                    class="px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">QUERIES</span>
+                                    class="skill-tag px-2 py-1 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-[10px] font-bold rounded">QUERIES</span>
                             </div>
                         </div>
                     </div>
@@ -626,23 +567,20 @@
             </div>
         </section>
 
-        <!-- Skills -->
+        <!-- Skills — reveal + stagger + skill-tag added -->
         <section class="py-32 bg-surface dark:bg-slate-950" id="skills">
             <div class="max-w-7xl mx-auto px-8">
 
-                <!-- Section Header -->
-                <div class="mb-16">
+                <div class="mb-16 reveal">
                     <h2 class="text-4xl md:text-5xl font-black tracking-tight text-on-primary-fixed dark:text-white">
                         Skills
                     </h2>
-
                 </div>
 
-                <!-- Skills Grid -->
                 <div class="grid md:grid-cols-3 gap-12">
 
                     <!-- Backend & Database -->
-                    <div>
+                    <div class="reveal" style="transition-delay: 0s;">
                         <div class="flex items-center gap-3 mb-8">
                             <span class="material-symbols-outlined text-secondary dark:text-blue-400">database</span>
                             <h3 class="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
@@ -652,30 +590,30 @@
 
                         <div class="flex flex-wrap gap-3">
                             <span
-                                class="px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
+                                class="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
                                 Node.js
                             </span>
                             <span
-                                class="px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
+                                class="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
                                 Express.js
                             </span>
                             <span
-                                class="px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
+                                class="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
                                 REST APIs
                             </span>
                             <span
-                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 MongoDB
                             </span>
                             <span
-                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 MySQL
                             </span>
                         </div>
                     </div>
 
                     <!-- Core Concepts -->
-                    <div>
+                    <div class="reveal" style="transition-delay: 0.1s;">
                         <div class="flex items-center gap-3 mb-8">
                             <span class="material-symbols-outlined text-secondary dark:text-blue-400">settings</span>
                             <h3 class="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
@@ -685,34 +623,34 @@
 
                         <div class="flex flex-wrap gap-3">
                             <span
-                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 API Security
                             </span>
                             <span
-                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 Authentication & Authorization
                             </span>
                             <span
-                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 Middleware Design
                             </span>
                             <span
-                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 Clean Code / MVC
                             </span>
                             <span
-                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 Performance Optimization
                             </span>
                             <span
-                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 Pagination & Filtering
                             </span>
                         </div>
                     </div>
 
                     <!-- Tools & Soft Skills -->
-                    <div>
+                    <div class="reveal" style="transition-delay: 0.2s;">
                         <div class="flex items-center gap-3 mb-8">
                             <span
                                 class="material-symbols-outlined text-secondary dark:text-blue-400">construction</span>
@@ -723,27 +661,27 @@
 
                         <div class="flex flex-wrap gap-3">
                             <span
-                                class="px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 Git & GitHub
                             </span>
                             <span
-                                class="px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 Postman
                             </span>
                             <span
-                                class="px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 Linux
                             </span>
                             <span
-                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 Problem Solving
                             </span>
                             <span
-                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 Teamwork
                             </span>
                             <span
-                                class="px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                                class="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                                 Communication
                             </span>
                         </div>
@@ -753,7 +691,7 @@
             </div>
         </section>
 
-        <!-- Education -->
+        <!-- Education — reveal + counter added -->
         <section class="py-32 bg-surface-container-low dark:bg-slate-900 overflow-hidden relative" id="education">
             <div class="absolute inset-0 opacity-40 dark:opacity-10 pointer-events-none">
                 <div class="grid grid-cols-6 h-full w-full">
@@ -768,8 +706,8 @@
             <div class="max-w-7xl mx-auto px-8 relative z-10">
                 <div class="grid md:grid-cols-2 items-center gap-16">
 
-                    <!-- Left Content -->
-                    <div>
+                    <!-- Left Content — reveal-left -->
+                    <div class="reveal-left">
                         <h2
                             class="text-4xl md:text-5xl font-black tracking-tight uppercase text-secondary dark:text-blue-400 mb-6">
                             Education
@@ -791,68 +729,73 @@
 
                         <div class="flex flex-wrap gap-3">
                             <span
-                                class="px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
+                                class="skill-tag px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
                                 Data Structures
                             </span>
                             <span
-                                class="px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
+                                class="skill-tag px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
                                 Databases
                             </span>
                             <span
-                                class="px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
+                                class="skill-tag px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
                                 Software Engineering
                             </span>
                             <span
-                                class="px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
+                                class="skill-tag px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
                                 Web Development
                             </span>
                         </div>
                     </div>
 
-                    <!-- Right Card -->
-                    <div
-                        class="bg-white dark:bg-slate-800/60 p-12 rounded-2xl border border-outline-variant/20 dark:border-slate-700 text-center shadow-sm dark:shadow-none">
-                        <div class="text-6xl font-black text-secondary dark:text-blue-400 mb-2">87%</div>
-
+                    <!-- Right Card — reveal with counter -->
+                    <div class="reveal" style="transition-delay: 0.15s;">
                         <div
-                            class="text-sm font-bold tracking-widest text-on-surface-variant dark:text-slate-300 uppercase">
-                            Final Grade
-                        </div>
+                            class="bg-white dark:bg-slate-800/60 p-12 rounded-2xl border border-outline-variant/20 dark:border-slate-700 text-center shadow-sm dark:shadow-none">
+                            <!-- Added id for counter JS targeting -->
+                            <div id="grade-counter" class="text-6xl font-black text-secondary dark:text-blue-400 mb-2">
+                                87%</div>
 
-                        <div class="mt-8 flex justify-center">
-                            <span
-                                class="material-symbols-outlined text-6xl opacity-40 text-on-primary-fixed dark:text-slate-300">
-                                school
-                            </span>
-                        </div>
+                            <div
+                                class="text-sm font-bold tracking-widest text-on-surface-variant dark:text-slate-300 uppercase">
+                                Final Grade
+                            </div>
 
-                        <p class="mt-6 text-sm text-on-surface-variant dark:text-slate-400 opacity-80">
-                            Strong academic performance with focus on backend systems and problem solving.
-                        </p>
+                            <div class="mt-8 flex justify-center">
+                                <span
+                                    class="material-symbols-outlined text-6xl opacity-40 text-on-primary-fixed dark:text-slate-300">
+                                    school
+                                </span>
+                            </div>
+
+                            <p class="mt-6 text-sm text-on-surface-variant dark:text-slate-400 opacity-80">
+                                Strong academic performance with focus on backend systems and problem solving.
+                            </p>
+                        </div>
                     </div>
 
                 </div>
             </div>
         </section>
 
-        <!-- Contact -->
+        <!-- Contact — contact-card class added -->
         <section class="py-32 bg-surface dark:bg-slate-950 relative overflow-hidden" id="contact">
             <div class="max-w-7xl mx-auto px-8 relative z-10">
-                <div class="text-center mb-20">
+                <div class="text-center mb-20 reveal">
                     <h2
                         class="text-5xl md:text-8xl font-black tracking-tighter text-on-primary-fixed dark:text-white mb-6 uppercase italic">
                         Contact<span class="animate-pulse text-secondary dark:text-blue-400">_</span>
                     </h2>
                     <p
                         class="text-lg md:text-xl text-on-surface-variant dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium">
-                        Interested in backend development, RESTful APIs, or collaboration opportunities? Let’s connect
+                        Interested in backend development, RESTful APIs, or collaboration opportunities? Let's connect
                         and build something impactful.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <!-- Added stagger-children to contact grid -->
+                <div class="stagger-children grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
                     <a href="mailto:khaledelmorsemanea@gmail.com"
-                        class="group relative p-8 bg-surface-container dark:bg-slate-900 rounded-xl border border-outline-variant/20 dark:border-slate-700 hover:border-secondary dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-1">
+                        class="contact-card group relative p-8 bg-surface-container dark:bg-slate-900 rounded-xl border border-outline-variant/20 dark:border-slate-700 hover:border-secondary dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-1">
                         <div class="flex flex-col items-center text-center gap-4">
                             <div
                                 class="w-14 h-14 rounded-full bg-surface-container-highest dark:bg-slate-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -872,7 +815,7 @@
                     </a>
 
                     <a href="tel:01098101014"
-                        class="group relative p-8 bg-surface-container dark:bg-slate-900 rounded-xl border border-outline-variant/20 dark:border-slate-700 hover:border-secondary dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-1">
+                        class="contact-card group relative p-8 bg-surface-container dark:bg-slate-900 rounded-xl border border-outline-variant/20 dark:border-slate-700 hover:border-secondary dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-1">
                         <div class="flex flex-col items-center text-center gap-4">
                             <div
                                 class="w-14 h-14 rounded-full bg-surface-container-highest dark:bg-slate-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -892,7 +835,7 @@
                     </a>
 
                     <a href="https://github.com/KhaledAlmorse" target="_blank"
-                        class="group relative p-8 bg-surface-container dark:bg-slate-900 rounded-xl border border-outline-variant/20 dark:border-slate-700 hover:border-secondary dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-1">
+                        class="contact-card group relative p-8 bg-surface-container dark:bg-slate-900 rounded-xl border border-outline-variant/20 dark:border-slate-700 hover:border-secondary dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-1">
                         <div class="flex flex-col items-center text-center gap-4">
                             <div
                                 class="w-14 h-14 rounded-full bg-surface-container-highest dark:bg-slate-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -912,7 +855,7 @@
                     </a>
 
                     <a href="https://linkedin.com/in/khaled-elmorse-manea" target="_blank"
-                        class="group relative p-8 bg-surface-container dark:bg-slate-900 rounded-xl border border-outline-variant/20 dark:border-slate-700 hover:border-secondary dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-1">
+                        class="contact-card group relative p-8 bg-surface-container dark:bg-slate-900 rounded-xl border border-outline-variant/20 dark:border-slate-700 hover:border-secondary dark:hover:border-blue-400 transition-all duration-300 hover:-translate-y-1">
                         <div class="flex flex-col items-center text-center gap-4">
                             <div
                                 class="w-14 h-14 rounded-full bg-surface-container-highest dark:bg-slate-800 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -983,6 +926,266 @@
             </div>
         </div>
     </footer>
+
+    <!-- ============================================================
+         ANIMATION JAVASCRIPT — DROP-IN BLOCK
+         All JS below this comment is new. It reads from the existing
+         DOM using IDs and classes already present, plus the new
+         animation classes added above. Zero conflict with existing JS.
+    ============================================================ -->
+    <script>
+        (function () {
+            'use strict';
+
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            /* ---- 1. Scroll progress bar ---- */
+            const progressBar = document.getElementById('scroll-progress');
+            if (progressBar) {
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.scrollY;
+                    const total = document.documentElement.scrollHeight - window.innerHeight;
+                    progressBar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+                }, { passive: true });
+            }
+
+            /* ---- 2. Scroll reveal via IntersectionObserver ---- */
+            if (!prefersReducedMotion) {
+                const revealEls = document.querySelectorAll('.reveal, .reveal-left, .stagger-children');
+
+                if ('IntersectionObserver' in window) {
+                    const revealObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('visible');
+                                revealObserver.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+                    revealEls.forEach(el => revealObserver.observe(el));
+                } else {
+                    // Fallback: show all immediately
+                    revealEls.forEach(el => el.classList.add('visible'));
+                }
+            } else {
+                // Reduced motion: show everything immediately
+                document.querySelectorAll('.reveal, .reveal-left, .stagger-children').forEach(el => {
+                    el.classList.add('visible');
+                });
+            }
+
+            /* ---- 3. Active nav link on scroll ---- */
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            if (sections.length && navLinks.length) {
+                const navObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            navLinks.forEach(link => {
+                                link.classList.remove('active');
+                                if (link.getAttribute('href') === '#' + entry.target.id) {
+                                    link.classList.add('active');
+                                }
+                            });
+                        }
+                    });
+                }, { rootMargin: '-40% 0px -55% 0px' });
+
+                sections.forEach(s => navObserver.observe(s));
+            }
+
+            /* ---- 4. 3D card tilt on mouse move ---- */
+            if (!prefersReducedMotion) {
+                document.querySelectorAll('.tilt-card').forEach(card => {
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = (e.clientX - rect.left) / rect.width - 0.5;
+                        const y = (e.clientY - rect.top) / rect.height - 0.5;
+                        card.style.transform =
+                            `perspective(700px) rotateY(${x * 9}deg) rotateX(${-y * 9}deg) translateY(-4px)`;
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = '';
+                    });
+                });
+            }
+
+            /* ---- 5. Button ripple effect ---- */
+            document.querySelectorAll('.btn-ripple').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const ripple = document.createElement('span');
+                    const size = Math.max(rect.width, rect.height);
+                    ripple.className = 'ripple-effect';
+                    ripple.style.cssText =
+                        `width:${size}px;height:${size}px;` +
+                        `left:${e.clientX - rect.left - size / 2}px;` +
+                        `top:${e.clientY - rect.top - size / 2}px;`;
+                    btn.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 700);
+                });
+            });
+
+            /* ---- 6. Grade counter animation ---- */
+            const gradeEl = document.getElementById('grade-counter');
+            if (gradeEl && !prefersReducedMotion) {
+                let counted = false;
+                const counterObserver = new IntersectionObserver(([entry]) => {
+                    if (entry.isIntersecting && !counted) {
+                        counted = true;
+                        const target = 87;
+                        const duration = 1400;
+                        const start = performance.now();
+                        const update = (now) => {
+                            const pct = Math.min((now - start) / duration, 1);
+                            const eased = 1 - Math.pow(1 - pct, 3); // ease-out cubic
+                            gradeEl.textContent = Math.round(eased * target) + '%';
+                            if (pct < 1) requestAnimationFrame(update);
+                        };
+                        requestAnimationFrame(update);
+                        counterObserver.disconnect();
+                    }
+                }, { threshold: 0.6 });
+                counterObserver.observe(gradeEl);
+            }
+
+            /* ---- 7. Subtle particle canvas in hero ---- */
+            (function initParticles() {
+                if (prefersReducedMotion) return;
+
+                const canvas = document.getElementById('hero-canvas');
+                if (!canvas) return;
+
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return;
+
+                const isDark = () => document.documentElement.classList.contains('dark');
+
+                let W, H, particles = [];
+                const COUNT = 28;
+
+                function resize() {
+                    W = canvas.width = canvas.offsetWidth;
+                    H = canvas.height = canvas.offsetHeight;
+                }
+
+                function rand(a, b) { return a + Math.random() * (b - a); }
+
+                function createParticle() {
+                    return {
+                        x: rand(0, W || 800),
+                        y: rand(H || 600, (H || 600) + 200),
+                        size: rand(1, 2.5),
+                        speed: rand(0.3, 0.9),
+                        drift: rand(-0.2, 0.2),
+                        opacity: rand(0.1, 0.5),
+                        life: 0,
+                        maxLife: rand(200, 400)
+                    };
+                }
+
+                function init() {
+                    resize();
+                    particles = Array.from({ length: COUNT }, createParticle);
+                    // Scatter them at start
+                    particles.forEach(p => { p.y = rand(0, H); p.life = rand(0, p.maxLife); });
+                }
+
+                function draw() {
+                    ctx.clearRect(0, 0, W, H);
+                    const color = isDark() ? '96, 165, 250' : '0, 88, 190';
+
+                    particles.forEach(p => {
+                        const lifePct = p.life / p.maxLife;
+                        const alpha = p.opacity * Math.sin(lifePct * Math.PI);
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(${color}, ${alpha.toFixed(3)})`;
+                        ctx.fill();
+
+                        p.y -= p.speed;
+                        p.x += p.drift;
+                        p.life++;
+
+                        if (p.life >= p.maxLife || p.y < -10) {
+                            Object.assign(p, createParticle());
+                            p.y = H + 10;
+                            p.life = 0;
+                        }
+                    });
+
+                    requestAnimationFrame(draw);
+                }
+
+                init();
+                draw();
+
+                window.addEventListener('resize', () => { resize(); }, { passive: true });
+            })();
+
+            /* ---- 8. Typing effect for hero role text ---- */
+            (function initTyping() {
+                if (prefersReducedMotion) return;
+
+                const roleSpan = document.querySelector('#hero .hero-desc .font-bold');
+                if (!roleSpan) return;
+
+                const phrases = [
+                    'backend developer',
+                    'API architect',
+                    'Node.js engineer',
+                    'backend developer'
+                ];
+
+                let phraseIdx = 0;
+                let charIdx = 0;
+                let deleting = false;
+                let paused = false;
+
+                roleSpan.classList.add('typing-cursor');
+
+                function type() {
+                    const current = phrases[phraseIdx];
+
+                    if (paused) {
+                        paused = false;
+                        setTimeout(type, deleting ? 80 : 1800);
+                        return;
+                    }
+
+                    if (deleting) {
+                        roleSpan.textContent = current.slice(0, charIdx - 1);
+                        charIdx--;
+                        if (charIdx === 0) {
+                            deleting = false;
+                            phraseIdx = (phraseIdx + 1) % (phrases.length - 1); // cycle back before sentinel
+                            paused = true;
+                        }
+                        setTimeout(type, 60);
+                    } else {
+                        roleSpan.textContent = current.slice(0, charIdx + 1);
+                        charIdx++;
+                        if (charIdx === current.length) {
+                            if (phraseIdx === phrases.length - 1) {
+                                // Last phrase (same as first) — stop
+                                roleSpan.classList.remove('typing-cursor');
+                                return;
+                            }
+                            deleting = true;
+                            paused = true;
+                        }
+                        setTimeout(type, 90);
+                    }
+                }
+
+                // Start after hero entrance animation
+                setTimeout(type, 1400);
+            })();
+
+        })();
+    </script>
 </body>
 
 </html>

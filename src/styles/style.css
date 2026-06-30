@@ -340,6 +340,7 @@ html {
     transform 0.3s ease,
     background-color 0.3s ease,
     box-shadow 0.3s ease !important;
+  will-change: transform;
 }
 
 .about-item:hover {

@@ -91,6 +91,24 @@ export default function Navbar() {
             Skills
           </a>
           <a
+            href="#education"
+            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+          >
+            Education
+          </a>
+          <a
+            href="#certifications"
+            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+          >
+            Certifications
+          </a>
+          <a
+            href="#awards"
+            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+          >
+            Awards
+          </a>
+          <a
             href="#contact"
             className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
           >
@@ -170,6 +188,27 @@ export default function Navbar() {
                 className="px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 Skills
+              </a>
+              <a
+                href="#education"
+                onClick={handleLinkClick}
+                className="px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              >
+                Education
+              </a>
+              <a
+                href="#certifications"
+                onClick={handleLinkClick}
+                className="px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              >
+                Certifications
+              </a>
+              <a
+                href="#awards"
+                onClick={handleLinkClick}
+                className="px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              >
+                Awards
               </a>
               <a
                 href="#contact"

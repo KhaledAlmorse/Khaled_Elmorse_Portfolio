@@ -1,82 +1,146 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import ProjectsCarousel from "./ProjectsCarousel";
 
 const projects = [
   {
     id: "asd",
     icon: "dataset",
-    title: "ASD Final Project",
-    category: "Enterprise Backend System",
+    title: "Autism Support Platform",
+    category: "Graduation Project",
     github: "https://github.com/KhaledAlmorse/ASD_Final_Project",
-    desc1: "A structured backend system designed to handle complex business workflows where multiple user roles interact with different parts of the system in a controlled and secure way.",
-    desc2: "Built using modular architecture and RESTful APIs with role-based access control (RBAC), enabling scalable development, secure operations, and clear separation between system components.",
-    tags: ["Node.js", "Express", "RBAC", "REST API"],
+    desc1:
+      "Built with React.js, Node.js, Express.js, and MongoDB to support end-to-end care workflows for an autism support platform.",
+    desc2:
+      "Includes 10+ RESTful APIs, JWT authentication, appointment scheduling, behavioral assessment modules, and a responsive UI.",
+    tags: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT"],
   },
   {
-    id: "ecommerce",
+    id: "clinc",
     icon: "shopping_cart",
-    title: "E-commerce API V2",
-    category: "E-commerce Backend",
-    github: "https://github.com/KhaledAlmorse/Ecommerce_api_V2",
-    desc1: "A backend system for an online store that handles product management, user accounts, orders, and the complete shopping workflow from browsing to checkout.",
-    desc2: "Built using RESTful APIs with authentication, filtering, pagination, and optimized query handling to ensure secure operations and efficient data processing as the system scales.",
-    tags: ["Node.js", "Express", "MongoDB", "REST API"],
+    title: "Clinic Appointment System",
+    category: "Full Stack Application",
+    github: "https://github.com/KhaledAlmorse/Clinic-Appointment-System",
+    desc1:
+      "Built with Python, Django, and MySQL for appointment scheduling, patient records, doctor management, and role-based authentication.",
+    desc2:
+      "Implements 10+ endpoints, 5+ relational models, and an MVC architecture for a clean and maintainable workflow.",
+    tags: ["Python", "Django", "MySQL", "MVC", "RBAC"],
   },
   {
     id: "social",
     icon: "groups",
-    title: "Social App",
-    category: "Social Platform API",
+    title: "Social Media API",
+    category: "API",
     github: "https://github.com/KhaledAlmorse/Social-APP",
-    desc1: "A backend API for a social networking platform that allows users to register, manage profiles, create posts, and interact with content through a secure application flow.",
-    desc2: "Built with authentication, protected routes, and scalable architecture supporting user relationships, post management, and real-time interaction workflows similar to modern social platforms.",
-    tags: ["Node.js", "Express", "REST API", "Auth"],
+    desc1:
+      "A RESTful API built with Node.js, Express.js, and MongoDB for 500+ simulated users with secure access control.",
+    desc2:
+      "Provides 8+ endpoints for posts, comments, likes, and follows, plus JWT authentication and role-based authorization.",
+    tags: ["Node.js", "Express.js", "MongoDB", "JWT", "RBAC"],
   },
   {
     id: "hotel",
     icon: "apartment",
-    title: "Hotel Booking System API",
-    category: "Hotel Reservation Backend",
-    github: "https://github.com/KhaledAlmorse/Hotel-Booking-System-Api",
-    desc1: "A backend system for managing hotel reservations, room availability, booking requests, and user access across a complete hotel management flow.",
-    desc2: "Built with RESTful APIs, authentication, role-based access control, and structured booking logic to support secure reservations and reliable room management operations.",
-    tags: ["Node.js", "Express", "Booking API", "RBAC"],
+    title: "Hotel Booking System",
+    category: "Full Stack Application",
+    github: "https://github.com/KhaledAlmorse/hotel-system",
+    desc1:
+      "A full stack booking platform built with Laravel, Vue.js, and MySQL for room reservations and customer workflows.",
+    desc2:
+      "Includes 15+ RESTful APIs, authentication, booking workflows, 3 responsive dashboards, and a 30% reduction in manual booking steps.",
+    tags: ["Laravel", "Vue.js", "MySQL", "REST API", "Auth"],
   },
   {
-    id: "bookstore",
+    id: "noteapp",
     icon: "menu_book",
-    title: "Book Store API V2",
-    category: "Bookstore Backend",
-    github: "https://github.com/KhaledAlmorse/Book_store_Api_V2",
-    desc1: "A backend system for managing an online bookstore, handling books, categories, users, and core operations like browsing, searching, and organizing catalog data.",
-    desc2: "Built with RESTful APIs, validation, and structured data handling to support scalable catalog management and efficient inventory-style workflows.",
-    tags: ["Node.js", "Express", "MongoDB", "REST API"],
+    title: "NoteWorkSpace App",
+    category: "Full Stack Application",
+    github: "https://github.com/KhaledAlmorse/NoteWorkSpaceApp",
+    desc1:
+      "A collaborative multi-user notes app built with React.js, Node.js, Express.js, and MongoDB.",
+    desc2:
+      "Uses JWT authentication, 10+ reusable React components/custom hooks, and optimized MongoDB queries for 25% better data retrieval performance.",
+    tags: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT"],
+  },
+  {
+    id: "cafeteria",
+    icon: "restaurant",
+    title: "Cafeteria Management System",
+    category: "Full Stack Application",
+    github: "https://github.com/KhaledAlmorse/cafeteria-project",
+    desc1:
+      "A PHP and MySQL system with 8+ CRUD-driven modules for handling cafeteria operations and user authentication.",
+    desc2:
+      "Built with relational database design to reduce manual order-processing time by 20%.",
+    tags: ["PHP", "MySQL", "CRUD", "Auth"],
   },
 ];
 
 export default function Projects() {
-  const handleMouseMove = (e) => {
+  const sectionRef = useRef(null);
+  const projectsCountRef = useRef(null);
+  const endpointsCountRef = useRef(null);
+
+  useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
-    if (prefersReducedMotion) return;
 
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    card.style.transform = `perspective(700px) rotateY(${
-      x * 9
-    }deg) rotateX(${-y * 9}deg) translateY(-4px)`;
-  };
+    const section = sectionRef.current;
+    const projectsCountEl = projectsCountRef.current;
+    const endpointsCountEl = endpointsCountRef.current;
 
-  const handleMouseLeave = (e) => {
-    e.currentTarget.style.transform = "";
-  };
+    if (
+      !section ||
+      !projectsCountEl ||
+      !endpointsCountEl ||
+      prefersReducedMotion
+    ) {
+      if (projectsCountEl) projectsCountEl.textContent = "6";
+      if (endpointsCountEl) endpointsCountEl.textContent = "50+";
+      return;
+    }
+
+    let hasAnimated = false;
+    const animate = (el, target, suffix = "") => {
+      const duration = 1200;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(eased * target);
+        el.textContent = `${value}${suffix}`;
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        }
+      };
+
+      requestAnimationFrame(tick);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          hasAnimated = true;
+          animate(projectsCountEl, 6);
+          animate(endpointsCountEl, 50, "+");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.45 },
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
       className="py-32 bg-surface-container-low dark:bg-slate-900"
       id="projects"
+      ref={sectionRef}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         <div className="mb-16 reveal">
@@ -90,7 +154,7 @@ export default function Projects() {
             <div className="grid grid-cols-2 gap-4 max-w-sm w-full lg:w-auto">
               <div className="bg-surface-container-lowest dark:bg-slate-950/70 border border-outline-variant/10 dark:border-slate-700 rounded-2xl px-5 py-4">
                 <p className="text-2xl font-black text-on-primary-fixed dark:text-white">
-                  5
+                  <span ref={projectsCountRef}>0</span>
                 </p>
                 <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.25em] text-on-surface-variant dark:text-slate-400">
                   Projects
@@ -98,74 +162,17 @@ export default function Projects() {
               </div>
               <div className="bg-surface-container-lowest dark:bg-slate-950/70 border border-outline-variant/10 dark:border-slate-700 rounded-2xl px-5 py-4">
                 <p className="text-2xl font-black text-on-primary-fixed dark:text-white">
-                  API
+                  <span ref={endpointsCountRef}>0</span>
                 </p>
                 <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.25em] text-on-surface-variant dark:text-slate-400">
-                  Focused
+                  Endpoints
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="stagger-children grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              className="tilt-card bg-surface-container-lowest dark:bg-slate-950/70 p-8 rounded-2xl shadow-sm border border-outline-variant/10 dark:border-slate-700 flex flex-col h-full hover:shadow-xl hover:border-secondary/20 dark:hover:border-blue-400/20 transition-all duration-300 transform"
-            >
-              <div className="flex justify-between items-start mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-secondary-fixed dark:bg-blue-500/20 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">
-                    {project.icon}
-                  </span>
-                </div>
-                <a
-                  className="text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400"
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`View ${project.title} on GitHub`}
-                >
-                  <span className="material-symbols-outlined">open_in_new</span>
-                </a>
-              </div>
-
-              <p className="mb-3 text-[10px] font-black uppercase tracking-[0.3em] text-on-surface-variant dark:text-slate-400">
-                {project.category}
-              </p>
-
-              <h3 className="text-2xl font-bold text-on-primary-fixed dark:text-white mb-4">
-                {project.title}
-              </h3>
-
-              <div className="space-y-4 flex-grow">
-                <p className="text-sm text-on-surface dark:text-slate-200 leading-snug">
-                  {project.desc1}
-                </p>
-
-                <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed">
-                  {project.desc2}
-                </p>
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-outline-variant/10 dark:border-slate-700">
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 text-xs font-bold uppercase bg-surface dark:bg-slate-800 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ProjectsCarousel projects={projects} />
       </div>
     </section>
   );

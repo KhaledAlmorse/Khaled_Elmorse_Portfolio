@@ -18,10 +18,22 @@ export default function Contact() {
               _
             </span>
           </h2>
-          <p className="text-lg md:text-xl text-on-surface-variant dark:text-slate-400 max-w-2xl mx-auto leading-relaxed font-medium">
-            Building scalable backend systems and high-performance APIs is what
-            I do best. Let’s turn your ideas into reliable, production-ready
-            solutions.
+
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-[11px] font-black uppercase tracking-[0.25em]">
+            <span className="px-4 py-2 rounded-full bg-surface-container-low dark:bg-slate-900/70 text-secondary dark:text-blue-400 border border-outline-variant/15 dark:border-slate-700">
+              Full Stack Developer
+            </span>
+            <span className="px-4 py-2 rounded-full bg-surface-container-low dark:bg-slate-900/70 text-on-surface-variant dark:text-slate-300 border border-outline-variant/15 dark:border-slate-700">
+              Mansoura, Egypt
+            </span>
+            <span className="px-4 py-2 rounded-full bg-surface-container-low dark:bg-slate-900/70 text-on-surface-variant dark:text-slate-300 border border-outline-variant/15 dark:border-slate-700">
+              Open to Collaboration
+            </span>
+          </div>
+
+          <p className="mt-6 text-sm text-on-surface-variant dark:text-slate-500 max-w-xl mx-auto">
+            Prefer email for project details, LinkedIn for professional
+            networking, and GitHub for code samples and repositories.
           </p>
         </div>
 

@@ -8,7 +8,7 @@ export default function Hero() {
   // Canvas particle animation
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
     if (prefersReducedMotion) return;
@@ -98,7 +98,7 @@ export default function Hero() {
   // Text typing animation
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
     if (prefersReducedMotion) return;
@@ -107,10 +107,9 @@ export default function Hero() {
     if (!roleSpan) return;
 
     const phrases = [
-      "backend developer",
-      "API architect",
-      "Node.js engineer",
-      "backend developer",
+      "full stack developer",
+      "Node.js and NestJS engineer",
+      "React and Angular builder",
     ];
 
     let phraseIdx = 0;
@@ -194,28 +193,31 @@ export default function Hero() {
                 ref={roleTextRef}
                 className="font-bold text-secondary dark:text-blue-400 text-xl md:text-2xl"
               >
-                backend developer
+                full stack developer
               </span>
               <br />
-              specializing in building secure, scalable, and high-performance
-              RESTful APIs using{" "}
+              specializing in end-to-end web applications with{" "}
+              <span className="text-on-surface dark:text-white font-bold">
+                React
+              </span>
+              ,{" "}
+              <span className="text-on-surface dark:text-white font-bold">
+                Angular
+              </span>
+              ,{" "}
               <span className="text-on-surface dark:text-white font-bold">
                 Node.js
               </span>
               ,{" "}
               <span className="text-on-surface dark:text-white font-bold">
-                Express.js
+                NestJS
               </span>
-              , and{" "}
-              <span className="text-on-surface dark:text-white font-bold">
-                MongoDB
-              </span>
-              .
+              , and SQL/NoSQL databases.
             </p>
             <p className="hero-sub text-on-surface-variant dark:text-slate-400 text-base md:text-lg max-w-xl leading-relaxed mx-auto lg:mx-0 opacity-80">
-              Focused on clean architecture, authentication, authorization,
-              middleware design, and performance optimization to deliver
-              reliable backend systems for real-world applications.
+              I build responsive UIs, secure REST APIs, and scalable server-side
+              systems with authentication, authorization, and clean architecture
+              in mind.
             </p>
           </div>
 
@@ -231,12 +233,14 @@ export default function Hero() {
             </a>
 
             <a
-              href="https://drive.google.com/file/d/1edX9RmlGxTTBZsNhrJg5jFKZDy4V3nxZ/view?usp=sharing"
+              href="https://drive.google.com/file/d/1HOcHZYKBcQGEu0LPtWDyXBbP30Jb_7lT/view?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-ripple h-12 w-full sm:w-auto px-8 border border-outline-variant dark:border-slate-700 text-on-surface dark:text-slate-100 rounded-xl font-bold tracking-wide hover:bg-surface-container-high dark:hover:bg-slate-800 transition-all active:scale-95 inline-flex items-center justify-center gap-2"
             >
-              <span className="material-symbols-outlined text-xl">download</span>
+              <span className="material-symbols-outlined text-xl">
+                download
+              </span>
               DOWNLOAD CV
             </a>
           </div>

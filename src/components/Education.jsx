@@ -5,7 +5,7 @@ export default function Education() {
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
     const gradeEl = gradeRef.current;
@@ -33,7 +33,7 @@ export default function Education() {
           counterObserver.disconnect();
         }
       },
-      { threshold: 0.6 }
+      { threshold: 0.6 },
     );
 
     counterObserver.observe(gradeEl);
@@ -71,7 +71,7 @@ export default function Education() {
             </h3>
 
             <p className="text-lg text-on-surface-variant dark:text-slate-300 font-medium mb-4">
-              Bachelor of Computer Science — 2024
+              Bachelor of Computer Science — 2021–2025
             </p>
 
             <p className="text-lg text-on-surface-variant dark:text-slate-300 leading-relaxed mb-6">
@@ -82,23 +82,24 @@ export default function Education() {
                   87%
                 </span>
                 )
+                <br />
               </span>
-              , with a strong foundation in software engineering, data structures,
-              and backend development.
+              with a strong foundation in software engineering, data structures
+              and algorithms, database systems, and full stack development.
             </p>
 
             <div className="flex flex-wrap gap-3">
               <span className="skill-tag px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
-                Data Structures
+                OOP
               </span>
               <span className="skill-tag px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
-                Databases
+                DSA
               </span>
               <span className="skill-tag px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
                 Software Engineering
               </span>
               <span className="skill-tag px-3 py-1 text-xs font-bold uppercase bg-white dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 rounded-full">
-                Web Development
+                Databases
               </span>
             </div>
           </div>
@@ -111,11 +112,11 @@ export default function Education() {
               </div>
 
               <h3 className="text-3xl md:text-4xl font-black text-on-primary-fixed dark:text-white leading-tight">
-                Open Source Applications Development Program
+                Open Source Applications Development Trainee
               </h3>
 
               <p className="mt-4 text-lg font-medium text-secondary dark:text-blue-400">
-                Information Technology Institute (ITI)
+                Information Technology Institute (ITI), Mansoura Branch
               </p>
 
               <div className="mt-8 flex justify-center" aria-hidden="true">
@@ -129,19 +130,36 @@ export default function Education() {
                   <span className="material-symbols-outlined text-outline-variant dark:text-slate-400 text-sm mt-1">
                     check_circle
                   </span>
-                  <span>Built RESTful APIs with multiple endpoints.</span>
+                  <span>Delivered 50+ production-ready API endpoints.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="material-symbols-outlined text-outline-variant dark:text-slate-400 text-sm mt-1">
                     check_circle
                   </span>
-                  <span>Implemented JWT authentication and authorization.</span>
+                  <span>
+                    Covered React, Angular, Vue.js, Next.js, Node.js, NestJS,
+                    Laravel, MongoDB, MySQL, GraphQL, and RESTful APIs.
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="material-symbols-outlined text-outline-variant dark:text-slate-400 text-sm mt-1">
                     check_circle
                   </span>
-                  <span>Improved performance and optimized queries.</span>
+                  <span>
+                    Strengthened CS foundations in OOP, DSA, software
+                    engineering, UML, design patterns, database systems,
+                    computer networks, and operating systems.
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="material-symbols-outlined text-outline-variant dark:text-slate-400 text-sm mt-1">
+                    check_circle
+                  </span>
+                  <span>
+                    Built 6+ scalable apps while practicing Agile teamwork, Git,
+                    unit testing, debugging, Linux, Docker, Apache, cloud
+                    fundamentals, and security.
+                  </span>
                 </li>
               </ul>
 

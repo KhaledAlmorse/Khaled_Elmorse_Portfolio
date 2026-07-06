@@ -15,13 +15,27 @@ export default function About() {
 
         <div className="space-y-10">
           <p className="reveal text-xl sm:text-2xl text-on-surface dark:text-slate-100 leading-snug font-light max-w-3xl">
-            I am a backend engineer driven by the philosophy of{" "}
+            I am a full stack developer focused on building complete web
+            experiences from UI to database. I have delivered 6+ full stack
+            projects and 50+ RESTful API endpoints, and I combine{" "}
             <span className="font-bold text-secondary dark:text-blue-400">
-              Clean Architecture
+              React
             </span>
-            . My work exists in the logic layer, where data integrity and system
-            scalability define success. I specialize in building robust and
-            scalable systems over solid foundations.
+            ,{" "}
+            <span className="font-bold text-secondary dark:text-blue-400">
+              Angular
+            </span>
+            ,{" "}
+            <span className="font-bold text-secondary dark:text-blue-400">
+              Node.js
+            </span>
+            , and{" "}
+            <span className="font-bold text-secondary dark:text-blue-400">
+              Nest.js <b> </b>
+            </span>
+            with SQL and NoSQL data design to deliver practical, scalable
+            applications with authentication, authorization, and clean
+            architecture.
           </p>
 
           <div className="stagger-children grid sm:grid-cols-2 gap-6 text-on-surface-variant dark:text-slate-300">
@@ -31,11 +45,11 @@ export default function About() {
               </span>
               <div>
                 <h4 className="font-bold text-on-primary-fixed dark:text-white text-lg">
-                  Backend Focus
+                  End-to-End Delivery
                 </h4>
                 <p className="leading-relaxed">
-                  Deep expertise in Node.js, Express, and MongoDB to architect
-                  powerful backend services.
+                  Comfortable moving between frontend interfaces, APIs, and
+                  database design to ship complete products.
                 </p>
               </div>
             </div>
@@ -46,11 +60,11 @@ export default function About() {
               </span>
               <div>
                 <h4 className="font-bold text-on-primary-fixed dark:text-white text-lg">
-                  API Development & Clean Architecture
+                  API Development & Security
                 </h4>
                 <p className="leading-relaxed">
-                  Constructing scalable and decoupled RESTful endpoints using
-                  proper design patterns.
+                  Building secure REST and GraphQL services with authentication,
+                  authorization, and clean architecture.
                 </p>
               </div>
             </div>
@@ -61,11 +75,11 @@ export default function About() {
               </span>
               <div>
                 <h4 className="font-bold text-on-primary-fixed dark:text-white text-lg">
-                  Problem-Solving Mindset
+                  Full Stack Problem Solving
                 </h4>
                 <p className="leading-relaxed">
-                  Methodical approach to debugging, optimizing algorithms, and
-                  resolving critical bottlenecks.
+                  Methodical approach to debugging, optimizing workflows, and
+                  resolving real product issues across the stack.
                 </p>
               </div>
             </div>
@@ -79,8 +93,9 @@ export default function About() {
                   Continuous Learning
                 </h4>
                 <p className="leading-relaxed">
-                  Graduated from an intensive 1100+ hour ITI training program
-                  specialized in Open Source.
+                  Built on an intensive ITI full-stack program and a Computer
+                  Science degree with strong foundations in software
+                  engineering.
                 </p>
               </div>
             </div>

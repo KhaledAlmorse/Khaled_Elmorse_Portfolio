@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="lg:col-span-5 space-y-5">
             <div>
               <p className="text-[10px] font-black uppercase tracking-[0.35em] text-secondary dark:text-blue-400 mb-3">
-                Backend Portfolio
+                Full Stack Portfolio
               </p>
               <span className="font-black text-3xl tracking-tighter text-on-primary-fixed dark:text-white uppercase">
                 Khaled Almorse
@@ -24,9 +24,9 @@ export default function Footer() {
             </div>
 
             <p className="text-on-surface-variant dark:text-slate-400 leading-relaxed max-w-md">
-              Backend developer focused on building secure, scalable, and
-              maintainable APIs with Node.js, Express.js, and database-driven
-              application architecture.
+              Full stack developer focused on building secure, scalable, and
+              maintainable web applications with React, Angular, Node.js,
+              NestJS, Laravel, and SQL/NoSQL architecture.
             </p>
 
             <div className="flex flex-wrap gap-3">

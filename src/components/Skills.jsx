@@ -11,14 +11,80 @@ export default function Skills() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-          {/* Backend & Database */}
           <div className="reveal" style={{ transitionDelay: "0s" }}>
             <div className="flex items-center gap-3 mb-8">
               <span className="material-symbols-outlined text-secondary dark:text-blue-400">
-                database
+                code
               </span>
               <h3 className="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
-                Backend & Database
+                Languages
+              </h3>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <span className="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
+                JavaScript (ES6+)
+              </span>
+              <span className="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
+                TypeScript
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                PHP
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Python
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Java
+              </span>
+            </div>
+          </div>
+
+          <div className="reveal" style={{ transitionDelay: "0.05s" }}>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="material-symbols-outlined text-secondary dark:text-blue-400">
+                web
+              </span>
+              <h3 className="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
+                Frontend
+              </h3>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <span className="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
+                HTML5
+              </span>
+              <span className="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
+                CSS3
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Bootstrap
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Tailwind CSS
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                React
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Angular
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Vue.js
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Next.js
+              </span>
+            </div>
+          </div>
+
+          <div className="reveal" style={{ transitionDelay: "0.1s" }}>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="material-symbols-outlined text-secondary dark:text-blue-400">
+                dns
+              </span>
+              <h3 className="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
+                Server-side
               </h3>
             </div>
 
@@ -29,86 +95,191 @@ export default function Skills() {
               <span className="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
                 Express.js
               </span>
-              <span className="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
-                REST APIs
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                NestJS
               </span>
               <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                MongoDB
+                Laravel
               </span>
               <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                MySQL
+                Django
               </span>
             </div>
           </div>
 
-          {/* Core Concepts */}
-          <div className="reveal" style={{ transitionDelay: "0.1s" }}>
+          <div className="reveal" style={{ transitionDelay: "0.15s" }}>
             <div className="flex items-center gap-3 mb-8">
               <span className="material-symbols-outlined text-secondary dark:text-blue-400">
-                settings
+                database
               </span>
               <h3 className="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
-                Core Concepts
+                Databases
               </h3>
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                API Security
+              <span className="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
+                MongoDB
+              </span>
+              <span className="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
+                MySQL
               </span>
               <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                Authentication & Authorization
-              </span>
-              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                Signup with Google OAuth
-              </span>
-              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                Middleware Design
-              </span>
-              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                Clean Code / MVC
-              </span>
-              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                Performance Optimization
-              </span>
-              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                Pagination & Filtering
+                PostgreSQL
               </span>
             </div>
           </div>
 
-          {/* Tools & Soft Skills */}
           <div className="reveal" style={{ transitionDelay: "0.2s" }}>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="material-symbols-outlined text-secondary dark:text-blue-400">
+                api
+              </span>
+              <h3 className="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
+                API Development
+              </h3>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <span className="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
+                RESTful APIs
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                GraphQL
+              </span>
+            </div>
+          </div>
+
+          <div className="reveal" style={{ transitionDelay: "0.25s" }}>
             <div className="flex items-center gap-3 mb-8">
               <span className="material-symbols-outlined text-secondary dark:text-blue-400">
                 construction
               </span>
               <h3 className="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
-                Tools & Soft Skills
+                Tools & Platforms
               </h3>
             </div>
 
             <div className="flex flex-wrap gap-3">
               <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                Git & GitHub
+                Git
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                GitHub
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Docker
               </span>
               <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                 Postman
               </span>
               <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Apache
+              </span>
+            </div>
+          </div>
+
+          <div className="reveal" style={{ transitionDelay: "0.3s" }}>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="material-symbols-outlined text-secondary dark:text-blue-400">
+                terminal
+              </span>
+              <h3 className="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
+                Systems
+              </h3>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
                 Linux
               </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Bash Scripting
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Computer Networks
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Operating Systems
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Cloud Computing
+              </span>
+            </div>
+          </div>
+
+          <div className="reveal" style={{ transitionDelay: "0.35s" }}>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="material-symbols-outlined text-secondary dark:text-blue-400">
+                smart_toy
+              </span>
+              <h3 className="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
+                AI-Assisted Development
+              </h3>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Prompt Engineering
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                ChatGPT
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Claude
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                GitHub Copilot
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Cursor AI
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                OpenAI Codex
+              </span>
+            </div>
+          </div>
+
+          <div className="reveal" style={{ transitionDelay: "0.4s" }}>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="material-symbols-outlined text-secondary dark:text-blue-400">
+                psychology
+              </span>
+              <h3 className="text-lg font-bold text-on-primary-fixed dark:text-white tracking-tight">
+                Software Engineering
+              </h3>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
               <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                Docker
+                OOP
               </span>
-              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                Problem Solving
+              <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                SOLID Principles
               </span>
-              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                Teamwork
+              <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Design Patterns
               </span>
-              <span className="skill-tag px-4 py-2 bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
-                Communication
+              <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Clean Architecture
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Software Architecture
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Data Structures & Algorithms
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Agile
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                UML
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Unit Testing
+              </span>
+              <span className="skill-tag px-4 py-2 bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 border border-outline-variant/20 dark:border-slate-700 text-xs font-bold rounded-full">
+                Application Security
               </span>
             </div>
           </div>

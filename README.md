@@ -1,6 +1,6 @@
-# Khaled Almorse — Backend Developer Portfolio
+# Khaled Almorse — Full Stack Developer Portfolio
 
-A pixel-perfect, highly-interactive portfolio built for **Khaled Almorse**, specializing in building secure, scalable, and high-performance RESTful APIs. 
+A pixel-perfect, highly-interactive portfolio built for **Khaled Almorse**, showcasing full stack web development work across frontend, server-side, and database-driven applications.
 
 This project is a 1:1 migration from a static HTML/CSS/JS architecture to a modern, component-driven **React + Vite** application using **Tailwind CSS v4**.
 

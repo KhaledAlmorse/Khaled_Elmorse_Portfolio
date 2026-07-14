@@ -16,14 +16,10 @@ export default function About() {
         <div className="space-y-10">
           <p className="reveal text-xl sm:text-2xl text-on-surface dark:text-slate-100 leading-snug font-light max-w-3xl">
             I am a full stack developer focused on building complete web
-            experiences from UI to database. I have delivered 6+ full stack
+            experiences from UI to database. I have delivered 10+
             projects and 50+ RESTful API endpoints, and I combine{" "}
             <span className="font-bold text-secondary dark:text-blue-400">
               React
-            </span>
-            ,{" "}
-            <span className="font-bold text-secondary dark:text-blue-400">
-              Angular
             </span>
             ,{" "}
             <span className="font-bold text-secondary dark:text-blue-400">
@@ -31,11 +27,18 @@ export default function About() {
             </span>
             , and{" "}
             <span className="font-bold text-secondary dark:text-blue-400">
-              Nest.js <b> </b>
+              Nest.js
             </span>
-            with SQL and NoSQL data design to deliver practical, scalable
-            applications with authentication, authorization, and clean
-            architecture.
+            ,{" "}
+            <span className="font-bold text-secondary dark:text-blue-400">
+              MongoDB
+            </span>
+            , and{" "}
+            <span className="font-bold text-secondary dark:text-blue-400">
+              PostgreSQL
+            </span>
+            , data design to deliver practical, scalable applications with
+            authentication, authorization, and clean architecture.
           </p>
 
           <div className="stagger-children grid sm:grid-cols-2 gap-6 text-on-surface-variant dark:text-slate-300">

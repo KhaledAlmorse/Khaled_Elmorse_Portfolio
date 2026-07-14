@@ -74,6 +74,66 @@ const projects = [
       "Built with relational database design to reduce manual order-processing time by 20%.",
     tags: ["PHP", "MySQL", "CRUD", "Auth"],
   },
+  {
+    id: "viora",
+    icon: "badge",
+    title: "Viora",
+    category: "Frontend Application",
+    github: "https://github.com/KhaledAlmorse/Viora",
+    desc1:
+      "A personal portfolio site built with React.js, Vite, and Tailwind CSS to showcase projects, skills, and experience.",
+    desc2:
+      "Focused on a fast, responsive UI with clean component structure and smooth navigation between sections.",
+    tags: ["React.js", "Vite", "Tailwind CSS"],
+  },
+  {
+    id: "ecommerce",
+    icon: "storefront",
+    title: "Ecommerce API",
+    category: "API",
+    github: "https://github.com/KhaledAlmorse/Ecommerce_api_V2",
+    desc1:
+      "A RESTful e-commerce backend built with Node.js and Express.js, structured around models, services, and routes.",
+    desc2:
+      "Handles product catalog, uploads, and order-related operations with a clean, layered MVC-style architecture.",
+    tags: ["Node.js", "Express.js", "REST API"],
+  },
+  {
+    id: "bookstore",
+    icon: "auto_stories",
+    title: "Book Store API",
+    category: "API",
+    github: "https://github.com/KhaledAlmorse/Book_store_Api_V2",
+    desc1:
+      "A RESTful API built with Node.js and Express.js for managing a bookstore's catalog and operations.",
+    desc2:
+      "Organized into models, services, and routes with middleware-based request handling and file uploads support.",
+    tags: ["Node.js", "Express.js", "REST API"],
+  },
+  {
+    id: "hotelapi",
+    icon: "hotel",
+    title: "Hotel Booking System API",
+    category: "API",
+    github: "https://github.com/KhaledAlmorse/Hotel-Booking-System-Api",
+    desc1:
+      "A RESTful API built with Node.js and Express.js for handling hotel room bookings and reservations.",
+    desc2:
+      "Implements a layered structure with models, services, and middleware for clean, maintainable request handling.",
+    tags: ["Node.js", "Express.js", "REST API"],
+  },
+  {
+    id: "pcstore",
+    icon: "devices",
+    title: "PC Store",
+    category: "Frontend Application",
+    github: "https://github.com/KhaledAlmorse/Pc_Store_VueJS",
+    desc1:
+      "A frontend e-commerce storefront for PC parts and accessories, built with Vue.js, Vite, and Tailwind CSS.",
+    desc2:
+      "Features a component-based UI for browsing products in a responsive, modern layout.",
+    tags: ["Vue.js", "Vite", "Tailwind CSS"],
+  },
 ];
 
 export default function Projects() {
@@ -96,7 +156,7 @@ export default function Projects() {
       !endpointsCountEl ||
       prefersReducedMotion
     ) {
-      if (projectsCountEl) projectsCountEl.textContent = "6";
+      if (projectsCountEl) projectsCountEl.textContent = String(projects.length);
       if (endpointsCountEl) endpointsCountEl.textContent = "50+";
       return;
     }
@@ -123,7 +183,7 @@ export default function Projects() {
       ([entry]) => {
         if (entry.isIntersecting && !hasAnimated) {
           hasAnimated = true;
-          animate(projectsCountEl, 6);
+          animate(projectsCountEl, projects.length);
           animate(endpointsCountEl, 50, "+");
           observer.disconnect();
         }

@@ -22,7 +22,7 @@ export default function Experience() {
             <div className="grid grid-cols-2 gap-4 max-w-md">
               <div className="bg-surface-container-low dark:bg-slate-900/70 border border-outline-variant/20 dark:border-slate-700 rounded-2xl p-5">
                 <p className="text-3xl font-black text-on-primary-fixed dark:text-white">
-                  6+
+                  10+
                 </p>
                 <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.25em] text-on-surface-variant dark:text-slate-400">
                   Projects

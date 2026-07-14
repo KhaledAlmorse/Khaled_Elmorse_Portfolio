@@ -202,17 +202,20 @@ export default function Hero() {
               </span>
               ,{" "}
               <span className="text-on-surface dark:text-white font-bold">
-                Angular
-              </span>
-              ,{" "}
-              <span className="text-on-surface dark:text-white font-bold">
                 Node.js
               </span>
               ,{" "}
               <span className="text-on-surface dark:text-white font-bold">
                 NestJS
               </span>
-              , and SQL/NoSQL databases.
+              ,{" "}
+              <span className="text-on-surface dark:text-white font-bold">
+                MongoDB
+              </span>
+              ,{" "}
+              <span className="text-on-surface dark:text-white font-bold">
+                PostgreSQL
+              </span>
             </p>
             <p className="hero-sub text-on-surface-variant dark:text-slate-400 text-base md:text-lg max-w-xl leading-relaxed mx-auto lg:mx-0 opacity-80">
               I build responsive UIs, secure REST APIs, and scalable server-side

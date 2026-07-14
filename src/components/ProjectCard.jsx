@@ -37,6 +37,36 @@ const projectHighlights = {
     "Relational Database Design",
     "20% Less Manual Processing",
   ],
+  viora: [
+    "React & Vite Portfolio UI",
+    "Clean Component Structure",
+    "Smooth Page Navigation",
+    "Tailwind CSS Styling",
+  ],
+  ecommerce: [
+    "RESTful Backend Architecture",
+    "Layered MVC Design",
+    "Product Catalog & Uploads",
+    "Order & Checkout Workflows",
+  ],
+  bookstore: [
+    "RESTful Bookstore API",
+    "Middleware Request Handling",
+    "File Upload Support",
+    "Catalog & Operation Management",
+  ],
+  hotelapi: [
+    "Room Booking & Reservations",
+    "Layered Services & Models",
+    "Middleware Request Handling",
+    "Maintainable Modular Codebase",
+  ],
+  pcstore: [
+    "Vue.js & Vite Storefront",
+    "Component-Based UI",
+    "PC Parts Catalog Browsing",
+    "Tailwind CSS Responsive Layout",
+  ],
 };
 
 export default function ProjectCard({ project, onMouseMove, onMouseLeave }) {

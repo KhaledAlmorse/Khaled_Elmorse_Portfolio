@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import profilePic from "../assets/images/2.jpg";
+import CvModal from "./CvModal";
 
 export default function Hero() {
   const canvasRef = useRef(null);
   const roleTextRef = useRef(null);
+  const [isCvModalOpen, setIsCvModalOpen] = useState(false);
 
   // Canvas particle animation
   useEffect(() => {
@@ -107,9 +109,10 @@ export default function Hero() {
     if (!roleSpan) return;
 
     const phrases = [
-      "full stack developer",
-      "Node.js and NestJS engineer",
-      "React and Angular builder",
+      "Full-Stack Developer",
+      "Node.js & NestJS Specialist",
+      "React & Next.js Builder",
+      "Database & API Engineer",
     ];
 
     let phraseIdx = 0;
@@ -134,7 +137,7 @@ export default function Hero() {
         charIdx -= 1;
         if (charIdx === 0) {
           deleting = false;
-          phraseIdx = (phraseIdx + 1) % (phrases.length - 1);
+          phraseIdx = (phraseIdx + 1) % phrases.length;
           paused = true;
         }
         timeoutId = setTimeout(type, 60);
@@ -142,10 +145,6 @@ export default function Hero() {
         roleSpan.textContent = current.slice(0, charIdx + 1);
         charIdx += 1;
         if (charIdx === current.length) {
-          if (phraseIdx === phrases.length - 1) {
-            roleSpan.classList.remove("typing-cursor");
-            return;
-          }
           deleting = true;
           paused = true;
         }
@@ -180,8 +179,8 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 w-full grid lg:grid-cols-2 gap-12 md:gap-16 xl:gap-24 items-center">
-        <div className="space-y-12 order-2 lg:order-1 text-center lg:text-left">
-          <div className="space-y-6">
+        <div className="space-y-8 order-2 lg:order-1 text-center lg:text-left">
+          <div className="space-y-5">
             <h1 className="hero-title text-on-primary-fixed dark:text-white text-4xl sm:text-5xl md:text-7xl font-black tracking-tight leading-tight">
               Khaled{" "}
               <span className="text-secondary dark:text-blue-400">Almorse</span>
@@ -193,12 +192,16 @@ export default function Hero() {
                 ref={roleTextRef}
                 className="font-bold text-secondary dark:text-blue-400 text-xl md:text-2xl"
               >
-                full stack developer
+                Full-Stack Developer
               </span>
               <br />
-              specializing in end-to-end web applications with{" "}
+              building scalable, production-grade applications with{" "}
               <span className="text-on-surface dark:text-white font-bold">
                 React
+              </span>
+              ,{" "}
+              <span className="text-on-surface dark:text-white font-bold">
+                Next.js
               </span>
               ,{" "}
               <span className="text-on-surface dark:text-white font-bold">
@@ -208,7 +211,7 @@ export default function Hero() {
               <span className="text-on-surface dark:text-white font-bold">
                 NestJS
               </span>
-              ,{" "}
+              , and databases like{" "}
               <span className="text-on-surface dark:text-white font-bold">
                 MongoDB
               </span>
@@ -216,15 +219,19 @@ export default function Hero() {
               <span className="text-on-surface dark:text-white font-bold">
                 PostgreSQL
               </span>
+              , &{" "}
+              <span className="text-on-surface dark:text-white font-bold">
+                MySQL
+              </span>
+              .
             </p>
             <p className="hero-sub text-on-surface-variant dark:text-slate-400 text-base md:text-lg max-w-xl leading-relaxed mx-auto lg:mx-0 opacity-80">
-              I build responsive UIs, secure REST APIs, and scalable server-side
-              systems with authentication, authorization, and clean architecture
-              in mind.
+              Focused on clean architecture, secure RESTful APIs, performance
+              optimization, and AI-assisted workflows.
             </p>
           </div>
 
-          <div className="hero-btns flex flex-col sm:flex-row sm:flex-wrap justify-center lg:justify-start gap-4 pt-4">
+          <div className="hero-btns flex flex-col sm:flex-row sm:flex-wrap justify-center lg:justify-start gap-4 pt-2">
             <a
               href="#projects"
               className="btn-ripple group h-12 w-full sm:w-auto px-8 bg-primary-container dark:bg-blue-600 text-on-primary rounded-xl font-bold tracking-wide transition-all shadow-lg hover:shadow-secondary/20 hover:ring-2 hover:ring-secondary/50 dark:hover:ring-blue-400/40 active:scale-95 flex items-center justify-center gap-3"
@@ -235,17 +242,16 @@ export default function Hero() {
               </span>
             </a>
 
-            <a
-              href="https://drive.google.com/file/d/1HOcHZYKBcQGEu0LPtWDyXBbP30Jb_7lT/view?usp=drive_link"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => setIsCvModalOpen(true)}
               className="btn-ripple h-12 w-full sm:w-auto px-8 border border-outline-variant dark:border-slate-700 text-on-surface dark:text-slate-100 rounded-xl font-bold tracking-wide hover:bg-surface-container-high dark:hover:bg-slate-800 transition-all active:scale-95 inline-flex items-center justify-center gap-2"
             >
               <span className="material-symbols-outlined text-xl">
                 download
               </span>
               DOWNLOAD CV
-            </a>
+            </button>
           </div>
         </div>
 
@@ -270,6 +276,12 @@ export default function Hero() {
         </span>
         <div className="w-[1px] h-14 bg-gradient-to-b from-secondary dark:from-blue-400 to-transparent"></div>
       </div>
+
+      {/* CV Selector Modal */}
+      <CvModal
+        isOpen={isCvModalOpen}
+        onClose={() => setIsCvModalOpen(false)}
+      />
     </section>
   );
 }

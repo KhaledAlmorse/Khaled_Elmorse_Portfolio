@@ -125,7 +125,7 @@ export default function Experience() {
                       React
                     </span>
                     <span className="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
-                      Vue.js
+                      NextJS
                     </span>
                     {/* <span className="skill-tag px-4 py-2 bg-secondary-fixed dark:bg-blue-500/20 text-on-secondary-fixed dark:text-blue-200 text-xs font-bold rounded-full border border-transparent dark:border-blue-400/20">
                       Angular

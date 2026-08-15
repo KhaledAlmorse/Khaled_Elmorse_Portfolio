@@ -4,7 +4,6 @@ import CvModal from "./CvModal";
 
 export default function Hero() {
   const canvasRef = useRef(null);
-  const roleTextRef = useRef(null);
   const [isCvModalOpen, setIsCvModalOpen] = useState(false);
 
   // Canvas particle animation
@@ -97,67 +96,6 @@ export default function Hero() {
     };
   }, []);
 
-  // Text typing animation
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (prefersReducedMotion) return;
-
-    const roleSpan = roleTextRef.current;
-    if (!roleSpan) return;
-
-    const phrases = [
-      "Full-Stack Developer",
-      "Node.js & NestJS Developer",
-      "React & Next.js Developer",
-    ];
-
-    let phraseIdx = 0;
-    let charIdx = 0;
-    let deleting = false;
-    let paused = false;
-    let timeoutId;
-
-    roleSpan.classList.add("typing-cursor");
-
-    const type = () => {
-      const current = phrases[phraseIdx];
-
-      if (paused) {
-        paused = false;
-        timeoutId = setTimeout(type, deleting ? 80 : 1800);
-        return;
-      }
-
-      if (deleting) {
-        roleSpan.textContent = current.slice(0, charIdx - 1);
-        charIdx -= 1;
-        if (charIdx === 0) {
-          deleting = false;
-          phraseIdx = (phraseIdx + 1) % phrases.length;
-          paused = true;
-        }
-        timeoutId = setTimeout(type, 60);
-      } else {
-        roleSpan.textContent = current.slice(0, charIdx + 1);
-        charIdx += 1;
-        if (charIdx === current.length) {
-          deleting = true;
-          paused = true;
-        }
-        timeoutId = setTimeout(type, 90);
-      }
-    };
-
-    timeoutId = setTimeout(type, 1400);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, []);
-
   return (
     <section
       className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden bg-surface dark:bg-slate-950"
@@ -187,10 +125,7 @@ export default function Hero() {
 
             <p className="hero-desc text-on-surface-variant dark:text-slate-300 text-lg md:text-xl max-w-xl font-normal leading-relaxed mx-auto lg:mx-0 opacity-90">
               Passionate{" "}
-              <span
-                ref={roleTextRef}
-                className="font-bold text-secondary dark:text-blue-400 text-xl md:text-2xl"
-              >
+              <span className="font-bold text-secondary dark:text-blue-400 text-xl md:text-2xl">
                 Full-Stack Developer
               </span>
               <br />

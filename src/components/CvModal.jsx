@@ -6,7 +6,7 @@ const cvOptions = [
     title: "Backend Developer",
     description:
       "Backend-focused CV highlighting server-side development, APIs, databases, and backend architecture.",
-    url: "https://drive.google.com/file/d/1sLhTBQ1XXq8U2i5jE1flxAHbwn9lA76O/view?usp=drive_link",
+    url: "https://drive.google.com/file/d/1p-E2SLQeP4RmUOELqigQsC_mGLXfphWT/view?usp=drive_link",
     icon: "dns",
   },
   {
@@ -14,7 +14,7 @@ const cvOptions = [
     title: "Full-Stack Developer",
     description:
       "Full-stack CV covering both frontend and backend application development.",
-    url: "https://drive.google.com/file/d/1zeLsgKgBIKQLuLasaBgb6u2I4Jy0VlAn/view?usp=drive_link",
+    url: "https://drive.google.com/file/d/1rVgaQqoizFPB5To7cFxfmjxOh72-dKrM/view?usp=drive_link",
     icon: "layers",
   },
   {
@@ -22,7 +22,7 @@ const cvOptions = [
     title: "Software Engineer",
     description:
       "Software engineering-focused CV emphasizing engineering practices, architecture, problem solving, and scalable software development.",
-    url: "https://drive.google.com/file/d/19nIJgQBd6HACQi2jOT1ZpL4Q1KqmDPCt/view?usp=drive_link",
+    url: "https://drive.google.com/file/d/1g8e6yxp-r75CwYfFrkFwwL_dWX6m53Os/view?usp=drive_link",
     icon: "code",
   },
 ];

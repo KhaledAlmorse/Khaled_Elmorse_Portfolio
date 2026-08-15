@@ -110,9 +110,8 @@ export default function Hero() {
 
     const phrases = [
       "Full-Stack Developer",
-      "Node.js & NestJS Specialist",
-      "React & Next.js Builder",
-      "Database & API Engineer",
+      "Node.js & NestJS Developer",
+      "React & Next.js Developer",
     ];
 
     let phraseIdx = 0;
@@ -237,7 +236,10 @@ export default function Hero() {
               className="btn-ripple group h-12 w-full sm:w-auto px-8 bg-primary-container dark:bg-blue-600 text-on-primary rounded-xl font-bold tracking-wide transition-all shadow-lg hover:shadow-secondary/20 hover:ring-2 hover:ring-secondary/50 dark:hover:ring-blue-400/40 active:scale-95 flex items-center justify-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2"
             >
               VIEW PROJECTS
-              <span aria-hidden="true" className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+              <span
+                aria-hidden="true"
+                className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform"
+              >
                 arrow_forward
               </span>
             </a>
@@ -250,7 +252,10 @@ export default function Hero() {
               aria-label="Open CV selection modal to download CV"
               className="btn-ripple h-12 w-full sm:w-auto px-8 border border-outline-variant dark:border-slate-700 text-on-surface dark:text-slate-100 rounded-xl font-bold tracking-wide hover:bg-surface-container-high dark:hover:bg-slate-800 transition-all active:scale-95 inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2"
             >
-              <span aria-hidden="true" className="material-symbols-outlined text-xl">
+              <span
+                aria-hidden="true"
+                className="material-symbols-outlined text-xl"
+              >
                 download
               </span>
               DOWNLOAD CV
@@ -285,10 +290,7 @@ export default function Hero() {
       </div>
 
       {/* CV Selector Modal */}
-      <CvModal
-        isOpen={isCvModalOpen}
-        onClose={() => setIsCvModalOpen(false)}
-      />
+      <CvModal isOpen={isCvModalOpen} onClose={() => setIsCvModalOpen(false)} />
     </section>
   );
 }

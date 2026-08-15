@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import profilePic from "../assets/images/2.jpg";
+import profilePic from "../assets/images/2.webp";
 import CvModal from "./CvModal";
 
 export default function Hero() {
@@ -234,10 +234,10 @@ export default function Hero() {
           <div className="hero-btns flex flex-col sm:flex-row sm:flex-wrap justify-center lg:justify-start gap-4 pt-2">
             <a
               href="#projects"
-              className="btn-ripple group h-12 w-full sm:w-auto px-8 bg-primary-container dark:bg-blue-600 text-on-primary rounded-xl font-bold tracking-wide transition-all shadow-lg hover:shadow-secondary/20 hover:ring-2 hover:ring-secondary/50 dark:hover:ring-blue-400/40 active:scale-95 flex items-center justify-center gap-3"
+              className="btn-ripple group h-12 w-full sm:w-auto px-8 bg-primary-container dark:bg-blue-600 text-on-primary rounded-xl font-bold tracking-wide transition-all shadow-lg hover:shadow-secondary/20 hover:ring-2 hover:ring-secondary/50 dark:hover:ring-blue-400/40 active:scale-95 flex items-center justify-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2"
             >
               VIEW PROJECTS
-              <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
+              <span aria-hidden="true" className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
                 arrow_forward
               </span>
             </a>
@@ -245,9 +245,12 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => setIsCvModalOpen(true)}
-              className="btn-ripple h-12 w-full sm:w-auto px-8 border border-outline-variant dark:border-slate-700 text-on-surface dark:text-slate-100 rounded-xl font-bold tracking-wide hover:bg-surface-container-high dark:hover:bg-slate-800 transition-all active:scale-95 inline-flex items-center justify-center gap-2"
+              aria-haspopup="dialog"
+              aria-expanded={isCvModalOpen}
+              aria-label="Open CV selection modal to download CV"
+              className="btn-ripple h-12 w-full sm:w-auto px-8 border border-outline-variant dark:border-slate-700 text-on-surface dark:text-slate-100 rounded-xl font-bold tracking-wide hover:bg-surface-container-high dark:hover:bg-slate-800 transition-all active:scale-95 inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2"
             >
-              <span className="material-symbols-outlined text-xl">
+              <span aria-hidden="true" className="material-symbols-outlined text-xl">
                 download
               </span>
               DOWNLOAD CV
@@ -262,7 +265,11 @@ export default function Hero() {
             <div className="relative p-6 bg-surface-container-high/80 dark:bg-slate-900/80 border border-white/10 dark:border-slate-700 rounded-[3rem] shadow-2xl backdrop-blur-sm">
               <img
                 src={profilePic}
-                alt="Khaled Almorse"
+                alt="Khaled Almorse - Full-Stack Developer"
+                width="400"
+                height="500"
+                fetchPriority="high"
+                decoding="async"
                 className="w-64 h-72 sm:w-72 sm:h-80 md:w-[400px] md:h-[500px] object-cover rounded-[2.5rem] border-2 border-surface-variant/50 dark:border-slate-700"
               />
             </div>

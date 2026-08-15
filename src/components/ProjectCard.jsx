@@ -86,63 +86,63 @@ export default function ProjectCard({ project, onMouseMove, onMouseLeave }) {
     >
       <div className="flex justify-between items-start mb-6">
         <div className="w-14 h-14 rounded-2xl bg-secondary-fixed dark:bg-blue-500/20 flex items-center justify-center">
-          <span className="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">
+          <span aria-hidden="true" className="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">
             {project.icon}
           </span>
         </div>
         <div className="flex items-center gap-1.5">
           {project.live && (
             <a
-              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors"
+              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
               title="Live Demo"
               aria-label={`View Live Demo for ${project.title}`}
             >
-              <span className="material-symbols-outlined text-xl">language</span>
+              <span aria-hidden="true" className="material-symbols-outlined text-xl">language</span>
             </a>
           )}
           {project.github && (
             <a
-              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors"
+              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
               title={project.frontend ? "Backend Repository" : "GitHub Repository"}
               aria-label={`View ${project.title} Repository on GitHub`}
             >
-              <span className="material-symbols-outlined text-xl">
+              <span aria-hidden="true" className="material-symbols-outlined text-xl">
                 {project.live || project.frontend || project.apiDocs ? "code" : "open_in_new"}
               </span>
             </a>
           )}
           {project.frontend && (
             <a
-              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors"
+              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
               href={project.frontend}
               target="_blank"
               rel="noopener noreferrer"
               title="Frontend Repository"
               aria-label={`View ${project.title} Frontend Repository on GitHub`}
             >
-              <span className="material-symbols-outlined text-xl">computer</span>
+              <span aria-hidden="true" className="material-symbols-outlined text-xl">computer</span>
             </a>
           )}
           {project.apiDocs && (
             <a
-              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors"
+              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
               href={project.apiDocs}
               target="_blank"
               rel="noopener noreferrer"
               title="API Documentation"
               aria-label={`View ${project.title} API Documentation`}
             >
-              <span className="material-symbols-outlined text-xl">description</span>
+              <span aria-hidden="true" className="material-symbols-outlined text-xl">description</span>
             </a>
           )}
           {!project.github && !project.live && (
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-on-surface-variant dark:text-slate-500">
+            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-on-surface-variant dark:text-slate-400">
               TODO: confirm repo link
             </span>
           )}

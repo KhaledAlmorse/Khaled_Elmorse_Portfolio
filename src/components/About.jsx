@@ -1,29 +1,6 @@
 import React from "react";
 
 export default function About() {
-  const metrics = [
-    {
-      value: "20+",
-      label: "RESTful APIs Delivered",
-      desc: "Built with Node.js & NestJS",
-    },
-    {
-      value: "30%",
-      label: "Query Latency Reduction",
-      desc: "Database & RBAC optimization",
-    },
-    {
-      value: "87%",
-      label: "CS Degree (Excellent)",
-      desc: "Faculty of Computers & Info",
-    },
-    {
-      value: "3rd",
-      label: "Graduation Project Place",
-      desc: "Autism Support Platform",
-    },
-  ];
-
   return (
     <section
       className="py-32 bg-surface-container-low dark:bg-slate-900"

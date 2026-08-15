@@ -32,13 +32,13 @@ export default function Footer() {
             <div className="flex flex-wrap gap-3">
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-xs font-bold uppercase tracking-[0.2em] hover:text-secondary dark:hover:text-blue-400 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-xs font-bold uppercase tracking-[0.2em] hover:text-secondary dark:hover:text-blue-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
               >
                 View Work
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-xs font-bold uppercase tracking-[0.2em] hover:text-secondary dark:hover:text-blue-400 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container dark:bg-slate-800 text-on-surface dark:text-slate-100 text-xs font-bold uppercase tracking-[0.2em] hover:text-secondary dark:hover:text-blue-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
               >
                 Contact
               </a>
@@ -46,21 +46,22 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-4">
-            <p className="text-[10px] font-black uppercase tracking-[0.35em] text-on-surface-variant dark:text-slate-500 mb-5">
+            <p className="text-[10px] font-black uppercase tracking-[0.35em] text-on-surface-variant dark:text-slate-400 mb-5">
               Quick Links
             </p>
             <div className="grid sm:grid-cols-2 gap-4">
               <a
-                className="group flex items-center gap-3 p-4 rounded-2xl bg-surface-container-low dark:bg-slate-800/70 border border-outline-variant/15 dark:border-slate-700 hover:border-secondary/30 dark:hover:border-blue-400/30 transition-all"
+                className="group flex items-center gap-3 p-4 rounded-2xl bg-surface-container-low dark:bg-slate-800/70 border border-outline-variant/15 dark:border-slate-700 hover:border-secondary/30 dark:hover:border-blue-400/30 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
                 href="https://github.com/KhaledAlmorse"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Visit Khaled Almorse GitHub profile"
               >
-                <span className="material-symbols-outlined text-secondary dark:text-blue-400 text-xl">
+                <span aria-hidden="true" className="material-symbols-outlined text-secondary dark:text-blue-400 text-xl">
                   code
                 </span>
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-500">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-400">
                     GitHub
                   </p>
                   <p className="text-sm font-bold text-on-surface dark:text-slate-100 group-hover:text-secondary dark:group-hover:text-blue-400 transition-colors">
@@ -70,16 +71,17 @@ export default function Footer() {
               </a>
 
               <a
-                className="group flex items-center gap-3 p-4 rounded-2xl bg-surface-container-low dark:bg-slate-800/70 border border-outline-variant/15 dark:border-slate-700 hover:border-secondary/30 dark:hover:border-blue-400/30 transition-all"
+                className="group flex items-center gap-3 p-4 rounded-2xl bg-surface-container-low dark:bg-slate-800/70 border border-outline-variant/15 dark:border-slate-700 hover:border-secondary/30 dark:hover:border-blue-400/30 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
                 href="https://www.linkedin.com/in/khaled-elmorse-manea-53863623b/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Visit Khaled Elmorse Manea LinkedIn profile"
               >
-                <span className="material-symbols-outlined text-secondary dark:text-blue-400 text-xl">
+                <span aria-hidden="true" className="material-symbols-outlined text-secondary dark:text-blue-400 text-xl">
                   person
                 </span>
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-500">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-400">
                     LinkedIn
                   </p>
                   <p className="text-sm font-bold text-on-surface dark:text-slate-100 group-hover:text-secondary dark:group-hover:text-blue-400 transition-colors">
@@ -89,14 +91,15 @@ export default function Footer() {
               </a>
 
               <a
-                className="group flex items-center gap-3 p-4 rounded-2xl bg-surface-container-low dark:bg-slate-800/70 border border-outline-variant/15 dark:border-slate-700 hover:border-secondary/30 dark:hover:border-blue-400/30 transition-all sm:col-span-2"
+                className="group flex items-center gap-3 p-4 rounded-2xl bg-surface-container-low dark:bg-slate-800/70 border border-outline-variant/15 dark:border-slate-700 hover:border-secondary/30 dark:hover:border-blue-400/30 transition-all sm:col-span-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
                 href="mailto:khaledelmorsemanea@gmail.com"
+                aria-label="Send email to khaledelmorsemanea@gmail.com"
               >
-                <span className="material-symbols-outlined text-secondary dark:text-blue-400 text-xl">
+                <span aria-hidden="true" className="material-symbols-outlined text-secondary dark:text-blue-400 text-xl">
                   mail
                 </span>
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-500">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-400">
                     Email
                   </p>
                   <p className="text-sm font-bold text-on-surface dark:text-slate-100 group-hover:text-secondary dark:group-hover:text-blue-400 transition-colors break-all">
@@ -109,7 +112,7 @@ export default function Footer() {
 
           <div className="lg:col-span-3 flex flex-col items-start lg:items-end gap-5">
             <div className="text-left lg:text-right">
-              <p className="text-[10px] font-black uppercase tracking-[0.35em] text-on-surface-variant dark:text-slate-500 mb-2">
+              <p className="text-[10px] font-black uppercase tracking-[0.35em] text-on-surface-variant dark:text-slate-400 mb-2">
                 Navigation
               </p>
               <p className="text-on-surface-variant dark:text-slate-400 leading-relaxed max-w-xs">
@@ -120,10 +123,12 @@ export default function Footer() {
 
             <button
               id="back-to-top"
+              type="button"
               onClick={scrollToTop}
-              className="bg-surface-container dark:bg-slate-800 hover:bg-surface-container-highest dark:hover:bg-slate-700 text-on-surface-variant dark:text-slate-300 hover:text-secondary dark:hover:text-blue-400 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-lg"
+              aria-label="Scroll back to top of page"
+              className="bg-surface-container dark:bg-slate-800 hover:bg-surface-container-highest dark:hover:bg-slate-700 text-on-surface-variant dark:text-slate-300 hover:text-secondary dark:hover:text-blue-400 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
             >
-              <span className="material-symbols-outlined">arrow_upward</span>
+              <span aria-hidden="true" className="material-symbols-outlined">arrow_upward</span>
             </button>
 
             <div className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant dark:text-slate-500 opacity-60 text-left lg:text-right">

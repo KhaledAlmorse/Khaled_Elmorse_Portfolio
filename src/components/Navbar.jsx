@@ -180,60 +180,64 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
           <a
             href="#about"
-            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 rounded-lg px-1 py-0.5"
           >
             About
           </a>
           <a
             href="#experience"
-            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 rounded-lg px-1 py-0.5"
           >
             Experience
           </a>
           <a
             href="#projects"
-            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 rounded-lg px-1 py-0.5"
           >
             Projects
           </a>
           <a
             href="#skills"
-            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 rounded-lg px-1 py-0.5"
           >
             Skills
           </a>
           <a
             href="#education"
-            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 rounded-lg px-1 py-0.5"
           >
             Education
           </a>
           <a
             href="#certifications"
-            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 rounded-lg px-1 py-0.5"
           >
             Certifications
           </a>
           <a
             href="#awards"
-            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 rounded-lg px-1 py-0.5"
           >
             Awards
           </a>
           <a
             href="#contact"
-            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+            className="nav-link text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 rounded-lg px-1 py-0.5"
           >
             Contact
           </a>
 
           <button
             id="theme-toggle"
+            type="button"
             onClick={toggleTheme}
-            className="ml-2 p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition group"
+            aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+            aria-pressed={isDark}
+            className="ml-2 p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
           >
             <span
               id="theme-icon"
+              aria-hidden="true"
               className="material-symbols-outlined text-lg group-hover:scale-110 transition"
             >
               {isDark ? "light_mode" : "dark_mode"}
@@ -245,21 +249,28 @@ export default function Navbar() {
         <div className="flex md:hidden items-center gap-2 relative">
           <button
             id="theme-toggle-mobile"
+            type="button"
             onClick={toggleTheme}
-            className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+            aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+            aria-pressed={isDark}
+            className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
           >
-            <span id="theme-icon-mobile" className="material-symbols-outlined text-lg">
+            <span id="theme-icon-mobile" aria-hidden="true" className="material-symbols-outlined text-lg">
               {isDark ? "light_mode" : "dark_mode"}
             </span>
           </button>
 
           <button
             id="mobile-menu-button"
+            type="button"
             ref={buttonRef}
             onClick={() => setIsMenuOpen((prev) => !prev)}
-            className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+            className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
           >
-            <span id="mobile-menu-icon" className="material-symbols-outlined text-xl">
+            <span id="mobile-menu-icon" aria-hidden="true" className="material-symbols-outlined text-xl">
               {isMenuOpen ? "close" : "menu"}
             </span>
           </button>
@@ -268,6 +279,8 @@ export default function Navbar() {
           <div
             id="mobile-menu"
             ref={menuRef}
+            role="menu"
+            aria-label="Mobile navigation"
             className={`${
               isMenuOpen ? "" : "hidden"
             } absolute top-14 right-0 w-64 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl p-4`}

@@ -31,7 +31,7 @@ export default function Contact() {
             </span>
           </div>
 
-          <p className="mt-6 text-sm text-on-surface-variant dark:text-slate-500 max-w-xl mx-auto">
+          <p className="mt-6 text-sm text-on-surface-variant dark:text-slate-400 max-w-xl mx-auto">
             Prefer email for project details, LinkedIn for professional
             networking, and GitHub for code samples and repositories.
           </p>
@@ -42,19 +42,20 @@ export default function Contact() {
           {/* Email Card */}
           <a
             href="mailto:khaledelmorsemanea@gmail.com"
-            className="contact-card group relative p-8 bg-surface-container/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-outline-variant/20 dark:border-slate-800 hover:border-secondary dark:hover:border-blue-400/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-secondary/10"
+            aria-label="Send email to khaledelmorsemanea@gmail.com"
+            className="contact-card group relative p-8 bg-surface-container/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-outline-variant/20 dark:border-slate-800 hover:border-secondary dark:hover:border-blue-400/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-secondary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2"
           >
             <div className="flex flex-col items-center text-center gap-5">
               <div className="relative">
                 <div className="absolute inset-0 bg-secondary dark:bg-blue-400 blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                 <div className="w-16 h-16 rounded-2xl bg-surface-container-highest dark:bg-slate-800 flex items-center justify-center group-hover:rotate-[10deg] transition-all duration-500">
-                  <span className="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">
+                  <span aria-hidden="true" className="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">
                     mail
                   </span>
                 </div>
               </div>
               <div className="w-full">
-                <p className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-500 mb-2">
+                <p className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-400 mb-2">
                   Email
                 </p>
                 <p className="font-bold text-sm text-on-surface dark:text-slate-200 group-hover:text-secondary dark:group-hover:text-blue-400 transition-colors break-all">
@@ -67,19 +68,20 @@ export default function Contact() {
           {/* Phone Card */}
           <a
             href="tel:01098101014"
-            className="contact-card group relative p-8 bg-surface-container/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-outline-variant/20 dark:border-slate-800 hover:border-secondary dark:hover:border-blue-400/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-secondary/10"
+            aria-label="Call phone number +201098101014"
+            className="contact-card group relative p-8 bg-surface-container/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-outline-variant/20 dark:border-slate-800 hover:border-secondary dark:hover:border-blue-400/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-secondary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2"
           >
             <div className="flex flex-col items-center text-center gap-5">
               <div className="relative">
                 <div className="absolute inset-0 bg-secondary dark:bg-blue-400 blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                 <div className="w-16 h-16 rounded-2xl bg-surface-container-highest dark:bg-slate-800 flex items-center justify-center group-hover:rotate-[10deg] transition-all duration-500">
-                  <span className="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">
+                  <span aria-hidden="true" className="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">
                     call
                   </span>
                 </div>
               </div>
               <div>
-                <p className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-500 mb-2">
+                <p className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-400 mb-2">
                   Phone
                 </p>
                 <p className="font-bold text-lg text-on-surface dark:text-slate-200 group-hover:text-secondary dark:group-hover:text-blue-400 transition-colors">
@@ -94,19 +96,20 @@ export default function Contact() {
             href="https://github.com/KhaledAlmorse"
             target="_blank"
             rel="noopener noreferrer"
-            className="contact-card group relative p-8 bg-surface-container/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-outline-variant/20 dark:border-slate-800 hover:border-secondary dark:hover:border-blue-400/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-secondary/10"
+            aria-label="Visit Khaled Almorse GitHub profile"
+            className="contact-card group relative p-8 bg-surface-container/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-outline-variant/20 dark:border-slate-800 hover:border-secondary dark:hover:border-blue-400/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-secondary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2"
           >
             <div className="flex flex-col items-center text-center gap-5">
               <div className="relative">
                 <div className="absolute inset-0 bg-secondary dark:bg-blue-400 blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                 <div className="w-16 h-16 rounded-2xl bg-surface-container-highest dark:bg-slate-800 flex items-center justify-center group-hover:rotate-[10deg] transition-all duration-500">
-                  <span className="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">
+                  <span aria-hidden="true" className="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">
                     code
                   </span>
                 </div>
               </div>
               <div className="w-full">
-                <p className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-500 mb-2">
+                <p className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-400 mb-2">
                   GitHub
                 </p>
                 <p className="font-bold text-sm text-on-surface dark:text-slate-200 group-hover:text-secondary dark:group-hover:text-blue-400 transition-colors break-all">
@@ -121,19 +124,20 @@ export default function Contact() {
             href="https://www.linkedin.com/in/khaled-elmorse-manea-53863623b/"
             target="_blank"
             rel="noopener noreferrer"
-            className="contact-card group relative p-8 bg-surface-container/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-outline-variant/20 dark:border-slate-800 hover:border-secondary dark:hover:border-blue-400/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-secondary/10"
+            aria-label="Visit Khaled Elmorse Manea LinkedIn profile"
+            className="contact-card group relative p-8 bg-surface-container/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-outline-variant/20 dark:border-slate-800 hover:border-secondary dark:hover:border-blue-400/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-secondary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2"
           >
             <div className="flex flex-col items-center text-center gap-5">
               <div className="relative">
                 <div className="absolute inset-0 bg-secondary dark:bg-blue-400 blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                 <div className="w-16 h-16 rounded-2xl bg-surface-container-highest dark:bg-slate-800 flex items-center justify-center group-hover:rotate-[10deg] transition-all duration-500">
-                  <span className="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">
+                  <span aria-hidden="true" className="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">
                     person
                   </span>
                 </div>
               </div>
               <div className="w-full">
-                <p className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-500 mb-2">
+                <p className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant dark:text-slate-400 mb-2">
                   LinkedIn
                 </p>
                 <p className="font-bold text-sm text-on-surface dark:text-slate-200 group-hover:text-secondary dark:group-hover:text-blue-400 transition-colors break-all">

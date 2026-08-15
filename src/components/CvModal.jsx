@@ -85,10 +85,10 @@ export default function CvModal({ isOpen, onClose }) {
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close modal"
-            className="p-2 rounded-xl text-on-surface-variant dark:text-slate-400 hover:bg-surface-container dark:hover:bg-slate-800 hover:text-on-surface dark:hover:text-white transition-colors"
+            aria-label="Close CV selection modal"
+            className="p-2 rounded-xl text-on-surface-variant dark:text-slate-400 hover:bg-surface-container dark:hover:bg-slate-800 hover:text-on-surface dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
           >
-            <span className="material-symbols-outlined text-2xl">close</span>
+            <span aria-hidden="true" className="material-symbols-outlined text-2xl">close</span>
           </button>
         </div>
 
@@ -101,7 +101,7 @@ export default function CvModal({ isOpen, onClose }) {
             >
               <div className="space-y-4 mb-6">
                 <div className="w-12 h-12 rounded-xl bg-secondary/10 dark:bg-blue-500/10 text-secondary dark:text-blue-400 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-2xl">
+                  <span aria-hidden="true" className="material-symbols-outlined text-2xl">
                     {cv.icon}
                   </span>
                 </div>
@@ -120,9 +120,10 @@ export default function CvModal({ isOpen, onClose }) {
                 href={cv.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-ripple h-11 w-full bg-primary-container dark:bg-blue-600 text-on-primary font-bold text-sm rounded-xl tracking-wide transition-all shadow-md hover:shadow-secondary/20 hover:ring-2 hover:ring-secondary/50 dark:hover:ring-blue-400/40 active:scale-95 flex items-center justify-center gap-2"
+                aria-label={`Download ${cv.title} CV (opens Google Drive)`}
+                className="btn-ripple h-11 w-full bg-primary-container dark:bg-blue-600 text-on-primary font-bold text-sm rounded-xl tracking-wide transition-all shadow-md hover:shadow-secondary/20 hover:ring-2 hover:ring-secondary/50 dark:hover:ring-blue-400/40 active:scale-95 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
               >
-                <span className="material-symbols-outlined text-lg">
+                <span aria-hidden="true" className="material-symbols-outlined text-lg">
                   download
                 </span>
                 Download CV

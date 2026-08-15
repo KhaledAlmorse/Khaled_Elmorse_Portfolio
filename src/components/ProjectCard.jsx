@@ -1,6 +1,12 @@
 import React from "react";
 
 const projectHighlights = {
+  restomind: [
+    "AI-Driven Demand Prediction",
+    "Node.js, NestJS & MongoDB Backend",
+    "JWT Auth & Role-Based Access Control",
+    "External AI Service Integration",
+  ],
   asd: [
     "JWT Authentication",
     "Appointment Scheduling",
@@ -84,21 +90,63 @@ export default function ProjectCard({ project, onMouseMove, onMouseLeave }) {
             {project.icon}
           </span>
         </div>
-        {project.github ? (
-          <a
-            className="text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 transition-colors"
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`View ${project.title} on GitHub`}
-          >
-            <span className="material-symbols-outlined">open_in_new</span>
-          </a>
-        ) : (
-          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-on-surface-variant dark:text-slate-500">
-            TODO: confirm repo link
-          </span>
-        )}
+        <div className="flex items-center gap-1.5">
+          {project.live && (
+            <a
+              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors"
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Live Demo"
+              aria-label={`View Live Demo for ${project.title}`}
+            >
+              <span className="material-symbols-outlined text-xl">language</span>
+            </a>
+          )}
+          {project.github && (
+            <a
+              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors"
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={project.frontend ? "Backend Repository" : "GitHub Repository"}
+              aria-label={`View ${project.title} Repository on GitHub`}
+            >
+              <span className="material-symbols-outlined text-xl">
+                {project.live || project.frontend || project.apiDocs ? "code" : "open_in_new"}
+              </span>
+            </a>
+          )}
+          {project.frontend && (
+            <a
+              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors"
+              href={project.frontend}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Frontend Repository"
+              aria-label={`View ${project.title} Frontend Repository on GitHub`}
+            >
+              <span className="material-symbols-outlined text-xl">computer</span>
+            </a>
+          )}
+          {project.apiDocs && (
+            <a
+              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors"
+              href={project.apiDocs}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="API Documentation"
+              aria-label={`View ${project.title} API Documentation`}
+            >
+              <span className="material-symbols-outlined text-xl">description</span>
+            </a>
+          )}
+          {!project.github && !project.live && (
+            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-on-surface-variant dark:text-slate-500">
+              TODO: confirm repo link
+            </span>
+          )}
+        </div>
       </div>
 
       <p className="mb-3 text-[10px] font-black uppercase tracking-[0.3em] text-on-surface-variant dark:text-slate-400">

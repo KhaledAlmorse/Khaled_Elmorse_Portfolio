@@ -23,6 +23,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
+  const isTransitioningRef = useRef(false);
 
   // Sync theme
   useEffect(() => {
@@ -30,8 +31,119 @@ export default function Navbar() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  const toggleTheme = (event) => {
+    if (isTransitioningRef.current) return;
+
+    const newTheme = theme === "dark" ? "light" : "dark";
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const updateThemeState = () => {
+      setTheme(newTheme);
+      applyTheme(newTheme);
+      localStorage.setItem("theme", newTheme);
+    };
+
+    // Direct toggle if reduced motion is enabled or no event
+    if (prefersReducedMotion || !event) {
+      updateThemeState();
+      return;
+    }
+
+    // Get exact center coordinates of clicked theme button element
+    const button =
+      (event.target && event.target.closest("button")) ||
+      event.currentTarget ||
+      event.target;
+    const rect = button.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+
+    // Calculate maximum distance to all 4 viewport corners
+    const distanceToTopLeft = Math.hypot(x, y);
+    const distanceToTopRight = Math.hypot(window.innerWidth - x, y);
+    const distanceToBottomLeft = Math.hypot(x, window.innerHeight - y);
+    const distanceToBottomRight = Math.hypot(window.innerWidth - x, window.innerHeight - y);
+
+    const maxDistance = Math.max(
+      distanceToTopLeft,
+      distanceToTopRight,
+      distanceToBottomLeft,
+      distanceToBottomRight
+    );
+
+    // Add a 25% safety margin + 50px buffer so the reveal extends comfortably past viewport edges
+    const endRadius = Math.ceil(maxDistance * 1.25 + 50);
+
+    // Lock transitions during animation playback
+    isTransitioningRef.current = true;
+    document.documentElement.classList.add("is-animating-theme");
+
+    // Use View Transitions API if supported
+    if (document.startViewTransition) {
+      const transition = document.startViewTransition(() => {
+        updateThemeState();
+      });
+
+      transition.ready.then(() => {
+        const anim = document.documentElement.animate(
+          {
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${endRadius}px at ${x}px ${y}px)`,
+            ],
+          },
+          {
+            duration: 750,
+            easing: "cubic-bezier(0.35, 0, 0.15, 1)",
+            fill: "forwards",
+            pseudoElement: "::view-transition-new(root)",
+          }
+        );
+
+        anim.finished.finally(() => {
+          document.documentElement.classList.remove("is-animating-theme");
+          isTransitioningRef.current = false;
+        });
+      });
+    } else {
+      // Fallback circular reveal overlay for browsers without View Transitions API
+      const overlay = document.createElement("div");
+      const isNewDark = newTheme === "dark";
+
+      overlay.style.cssText = `
+        position: fixed;
+        top: ${y}px;
+        left: ${x}px;
+        width: 0px;
+        height: 0px;
+        border-radius: 50%;
+        background-color: ${isNewDark ? "#090d16" : "#ffffff"};
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 999999;
+        transition: width 0.78s cubic-bezier(0.35, 0, 0.15, 1), height 0.78s cubic-bezier(0.35, 0, 0.15, 1);
+      `;
+
+      document.body.appendChild(overlay);
+
+      requestAnimationFrame(() => {
+        overlay.style.width = `${endRadius * 2}px`;
+        overlay.style.height = `${endRadius * 2}px`;
+      });
+
+      setTimeout(() => {
+        updateThemeState();
+      }, 450);
+
+      setTimeout(() => {
+        overlay.remove();
+        document.documentElement.classList.remove("is-animating-theme");
+        isTransitioningRef.current = false;
+      }, 800);
+    }
   };
 
   // Close mobile menu on click outside

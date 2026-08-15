@@ -3,6 +3,21 @@ import ProjectsCarousel from "./ProjectsCarousel";
 
 const projects = [
   {
+    id: "restomind",
+    icon: "recycling",
+    title: "RestoMind — AI-Powered Restaurant Waste Management Platform",
+    category: "Graduation Project",
+    github: "https://github.com/KhaledAlmorse/RestoMindAPI",
+    live: "https://restomind.vercel.app/",
+    frontend: "https://github.com/AhmedMohO/restomind-app",
+    apiDocs: "https://documenter.getpostman.com/view/28645479/2sBY4PPfia",
+    desc1:
+      "A full-stack platform that helps restaurants reduce food waste and recover revenue from surplus inventory, using AI-driven demand prediction and waste-risk insights.",
+    desc2:
+      "Built the backend using Node.js, NestJS, and MongoDB, including RESTful APIs, authentication/authorization, role-based access control (RBAC), and external AI service integration.",
+    tags: ["Node.js", "NestJS", "MongoDB", "Next.js", "AI Integration"],
+  },
+  {
     id: "asd",
     icon: "dataset",
     title: "Autism Support Platform",
@@ -74,72 +89,11 @@ const projects = [
       "Built with relational database design to reduce manual order-processing time by 20%.",
     tags: ["PHP", "MySQL", "CRUD", "Auth"],
   },
-  {
-    id: "viora",
-    icon: "badge",
-    title: "Viora",
-    category: "Frontend Application",
-    github: "https://github.com/KhaledAlmorse/Viora",
-    desc1:
-      "A personal portfolio site built with React.js, Vite, and Tailwind CSS to showcase projects, skills, and experience.",
-    desc2:
-      "Focused on a fast, responsive UI with clean component structure and smooth navigation between sections.",
-    tags: ["React.js", "Vite", "Tailwind CSS"],
-  },
-  {
-    id: "ecommerce",
-    icon: "storefront",
-    title: "Ecommerce API",
-    category: "API",
-    github: "https://github.com/KhaledAlmorse/Ecommerce_api_V2",
-    desc1:
-      "A RESTful e-commerce backend built with Node.js and Express.js, structured around models, services, and routes.",
-    desc2:
-      "Handles product catalog, uploads, and order-related operations with a clean, layered MVC-style architecture.",
-    tags: ["Node.js", "Express.js", "REST API"],
-  },
-  {
-    id: "bookstore",
-    icon: "auto_stories",
-    title: "Book Store API",
-    category: "API",
-    github: "https://github.com/KhaledAlmorse/Book_store_Api_V2",
-    desc1:
-      "A RESTful API built with Node.js and Express.js for managing a bookstore's catalog and operations.",
-    desc2:
-      "Organized into models, services, and routes with middleware-based request handling and file uploads support.",
-    tags: ["Node.js", "Express.js", "REST API"],
-  },
-  {
-    id: "hotelapi",
-    icon: "hotel",
-    title: "Hotel Booking System API",
-    category: "API",
-    github: "https://github.com/KhaledAlmorse/Hotel-Booking-System-Api",
-    desc1:
-      "A RESTful API built with Node.js and Express.js for handling hotel room bookings and reservations.",
-    desc2:
-      "Implements a layered structure with models, services, and middleware for clean, maintainable request handling.",
-    tags: ["Node.js", "Express.js", "REST API"],
-  },
-  {
-    id: "pcstore",
-    icon: "devices",
-    title: "PC Store",
-    category: "Frontend Application",
-    github: "https://github.com/KhaledAlmorse/Pc_Store_VueJS",
-    desc1:
-      "A frontend e-commerce storefront for PC parts and accessories, built with Vue.js, Vite, and Tailwind CSS.",
-    desc2:
-      "Features a component-based UI for browsing products in a responsive, modern layout.",
-    tags: ["Vue.js", "Vite", "Tailwind CSS"],
-  },
 ];
 
 export default function Projects() {
   const sectionRef = useRef(null);
   const projectsCountRef = useRef(null);
-  const endpointsCountRef = useRef(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
@@ -148,21 +102,18 @@ export default function Projects() {
 
     const section = sectionRef.current;
     const projectsCountEl = projectsCountRef.current;
-    const endpointsCountEl = endpointsCountRef.current;
 
     if (
       !section ||
       !projectsCountEl ||
-      !endpointsCountEl ||
       prefersReducedMotion
     ) {
-      if (projectsCountEl) projectsCountEl.textContent = String(projects.length);
-      if (endpointsCountEl) endpointsCountEl.textContent = "50+";
+      if (projectsCountEl) projectsCountEl.textContent = projects.length.toString();
       return;
     }
 
     let hasAnimated = false;
-    const animate = (el, target, suffix = "") => {
+    const animate = (el, target) => {
       const duration = 1200;
       const start = performance.now();
 
@@ -170,7 +121,7 @@ export default function Projects() {
         const progress = Math.min((now - start) / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
         const value = Math.round(eased * target);
-        el.textContent = `${value}${suffix}`;
+        el.textContent = `${value}`;
         if (progress < 1) {
           requestAnimationFrame(tick);
         }
@@ -184,7 +135,6 @@ export default function Projects() {
         if (entry.isIntersecting && !hasAnimated) {
           hasAnimated = true;
           animate(projectsCountEl, projects.length);
-          animate(endpointsCountEl, 50, "+");
           observer.disconnect();
         }
       },
@@ -211,21 +161,13 @@ export default function Projects() {
               </h2>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 max-w-sm w-full lg:w-auto">
-              <div className="bg-surface-container-lowest dark:bg-slate-950/70 border border-outline-variant/10 dark:border-slate-700 rounded-2xl px-5 py-4">
-                <p className="text-2xl font-black text-on-primary-fixed dark:text-white">
+            <div>
+              <div className="bg-surface-container-lowest dark:bg-slate-950/70 border border-outline-variant/10 dark:border-slate-700 rounded-2xl px-6 py-4 text-center">
+                <p className="text-2xl sm:text-3xl font-black text-on-primary-fixed dark:text-white">
                   <span ref={projectsCountRef}>0</span>
                 </p>
                 <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.25em] text-on-surface-variant dark:text-slate-400">
                   Projects
-                </p>
-              </div>
-              <div className="bg-surface-container-lowest dark:bg-slate-950/70 border border-outline-variant/10 dark:border-slate-700 rounded-2xl px-5 py-4">
-                <p className="text-2xl font-black text-on-primary-fixed dark:text-white">
-                  <span ref={endpointsCountRef}>0</span>
-                </p>
-                <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.25em] text-on-surface-variant dark:text-slate-400">
-                  Endpoints
                 </p>
               </div>
             </div>

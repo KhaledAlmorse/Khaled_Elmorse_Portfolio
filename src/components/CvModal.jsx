@@ -6,7 +6,7 @@ const cvOptions = [
     title: "Backend Developer",
     description:
       "Backend-focused CV highlighting server-side development, APIs, databases, and backend architecture.",
-    url: "https://drive.google.com/file/d/1p-E2SLQeP4RmUOELqigQsC_mGLXfphWT/view?usp=drive_link",
+    url: "https://drive.google.com/file/d/1SYvI7pnIBjxoloPJF1TqDAZutP5b5RUj/view?usp=drive_link",
     icon: "dns",
   },
   {
@@ -14,7 +14,7 @@ const cvOptions = [
     title: "Full-Stack Developer",
     description:
       "Full-stack CV covering both frontend and backend application development.",
-    url: "https://drive.google.com/file/d/1rVgaQqoizFPB5To7cFxfmjxOh72-dKrM/view?usp=drive_link",
+    url: "https://drive.google.com/file/d/1HSQY4HpYItCkxmGmAbXJ0qjWfbzGP1Wj/view?usp=drive_link",
     icon: "layers",
   },
   {
@@ -22,7 +22,7 @@ const cvOptions = [
     title: "Software Engineer",
     description:
       "Software engineering-focused CV emphasizing engineering practices, architecture, problem solving, and scalable software development.",
-    url: "https://drive.google.com/file/d/1g8e6yxp-r75CwYfFrkFwwL_dWX6m53Os/view?usp=drive_link",
+    url: "https://drive.google.com/file/d/1GLeKnLFOE7ffH5z5PGGCFMCmBPZIBAYT/view?usp=drive_link",
     icon: "code",
   },
 ];
@@ -88,7 +88,12 @@ export default function CvModal({ isOpen, onClose }) {
             aria-label="Close CV selection modal"
             className="p-2 rounded-xl text-on-surface-variant dark:text-slate-400 hover:bg-surface-container dark:hover:bg-slate-800 hover:text-on-surface dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
           >
-            <span aria-hidden="true" className="material-symbols-outlined text-2xl">close</span>
+            <span
+              aria-hidden="true"
+              className="material-symbols-outlined text-2xl"
+            >
+              close
+            </span>
           </button>
         </div>
 
@@ -101,7 +106,10 @@ export default function CvModal({ isOpen, onClose }) {
             >
               <div className="space-y-4 mb-6">
                 <div className="w-12 h-12 rounded-xl bg-secondary/10 dark:bg-blue-500/10 text-secondary dark:text-blue-400 flex items-center justify-center">
-                  <span aria-hidden="true" className="material-symbols-outlined text-2xl">
+                  <span
+                    aria-hidden="true"
+                    className="material-symbols-outlined text-2xl"
+                  >
                     {cv.icon}
                   </span>
                 </div>
@@ -123,7 +131,10 @@ export default function CvModal({ isOpen, onClose }) {
                 aria-label={`Download ${cv.title} CV (opens Google Drive)`}
                 className="btn-ripple h-11 w-full bg-primary-container dark:bg-blue-600 text-on-primary font-bold text-sm rounded-xl tracking-wide transition-all shadow-md hover:shadow-secondary/20 hover:ring-2 hover:ring-secondary/50 dark:hover:ring-blue-400/40 active:scale-95 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
               >
-                <span aria-hidden="true" className="material-symbols-outlined text-lg">
+                <span
+                  aria-hidden="true"
+                  className="material-symbols-outlined text-lg"
+                >
                   download
                 </span>
                 Download CV

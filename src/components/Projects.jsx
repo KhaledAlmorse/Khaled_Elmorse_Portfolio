@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ProjectsCarousel from "./ProjectsCarousel";
 
-const API_PROJECT_IMAGE = "/images/project/api-project.png";
+const API_PROJECT_IMAGE = "/images/project/api-project.webp";
 
 const projects = [
   {
@@ -9,11 +9,11 @@ const projects = [
     icon: "recycling",
     title: "RestoMind — AI-Powered Restaurant Waste Management Platform",
     category: "Graduation Project",
-    image: "/images/project/restoMind.png",
+    image: "/images/project/restoMind.webp",
     github: "https://github.com/KhaledAlmorse/RestoMindAPI",
     live: "https://restomind.vercel.app/",
     frontend: "https://github.com/AhmedMohO/restomind-app",
-    apiDocs: "https://documenter.getpostman.com/view/28645479/2sBY4PPfia",
+    // apiDocs: "https://documenter.getpostman.com/view/28645479/2sBY4PPfia",
     desc1:
       "A full-stack platform that helps restaurants reduce food waste and recover revenue from surplus inventory, using AI-driven demand prediction and waste-risk insights.",
     desc2:
@@ -25,7 +25,7 @@ const projects = [
     icon: "dataset",
     title: "Autism Support Platform",
     category: "Graduation Project",
-    image: "/images/project/asdSmartCare.png",
+    image: "/images/project/asdSmartCare.webp",
     github: "https://github.com/KhaledAlmorse/ASD_Final_Project",
     desc1:
       "Built with React.js, Node.js, Express.js, and MongoDB to support end-to-end care workflows for an autism support platform.",
@@ -38,7 +38,7 @@ const projects = [
     icon: "shopping_cart",
     title: "Clinic Appointment System",
     category: "Full Stack Application",
-    image: "/images/project/clinic.png",
+    image: "/images/project/clinic.webp",
     github: "https://github.com/KhaledAlmorse/Clinic-Appointment-System",
     desc1:
       "Built with Python, Django, and MySQL for appointment scheduling, patient records, doctor management, and role-based authentication.",
@@ -51,7 +51,7 @@ const projects = [
     icon: "web",
     title: "Viora",
     category: "Web Application",
-    image: "/images/project/viora.png",
+    image: "/images/project/viora.webp",
     github: "https://github.com/KhaledAlmorse/Viora",
     live: "https://viora-lovat.vercel.app",
     desc1:
@@ -76,7 +76,7 @@ const projects = [
     icon: "apartment",
     title: "Hotel Booking System",
     category: "Full Stack Application",
-    image: "/images/project/HotelSystem.png",
+    image: "/images/project/HotelSystem.webp",
     github: "https://github.com/KhaledAlmorse/hotel-system",
     desc1:
       "A full stack booking platform built with Laravel, Vue.js, and MySQL for room reservations and customer workflows.",
@@ -89,7 +89,7 @@ const projects = [
     icon: "menu_book",
     title: "NoteWorkSpace App",
     category: "Full Stack Application",
-    image: "/images/project/note.png",
+    image: "/images/project/note.webp",
     github: "https://github.com/KhaledAlmorse/NoteWorkSpaceApp",
     desc1:
       "A collaborative multi-user notes app built with React.js, Node.js, Express.js, and MongoDB.",
@@ -114,7 +114,7 @@ const projects = [
     icon: "restaurant",
     title: "Cafeteria Management System",
     category: "Full Stack Application",
-    image: "/images/project/cafeteria.png",
+    image: "/images/project/cafeteria.webp",
     github: "https://github.com/KhaledAlmorse/cafeteria-project",
     desc1:
       "A PHP and MySQL system with 8+ CRUD-driven modules for handling cafeteria operations and user authentication.",

@@ -7,23 +7,25 @@ export default function ProjectCard({ project, onMouseMove, onMouseLeave }) {
   const links = project.links || project;
 
   return (
-    <div
+    <article
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       className="group tilt-card bg-surface-container-lowest dark:bg-slate-950/80 rounded-2xl shadow-sm border border-outline-variant/15 dark:border-slate-800 flex flex-col h-full overflow-hidden hover:shadow-xl hover:border-secondary/30 dark:hover:border-blue-400/30 transition-all duration-300"
     >
-      {/* 1. Project Image (16:9 Aspect Ratio) */}
-      <div className="relative aspect-video w-full overflow-hidden bg-surface-container-high dark:bg-slate-900 border-b border-outline-variant/10 dark:border-slate-800">
+      {/* 1. Project Image (Fixed 16:9 Aspect Ratio) */}
+      <div className="relative aspect-video w-full overflow-hidden bg-surface-container-high dark:bg-slate-900 border-b border-outline-variant/10 dark:border-slate-800 shrink-0">
         <img
           src={project.image || FALLBACK_IMAGE}
           alt={project.title}
           loading="lazy"
+          width="640"
+          height="360"
           onError={(e) => {
             if (e.currentTarget.src !== FALLBACK_IMAGE) {
               e.currentTarget.src = FALLBACK_IMAGE;
             }
           }}
-          className="h-full w-full object-cover transition-transform duration-500"
+          className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
@@ -31,24 +33,24 @@ export default function ProjectCard({ project, onMouseMove, onMouseLeave }) {
       {/* Card Content Body */}
       <div className="p-6 sm:p-7 flex flex-col flex-1">
         {/* 2. Project Type / Category */}
-        <div className="mb-2">
+        <div className="mb-2 min-h-[1.25rem] flex items-center">
           <span className="text-[11px] font-black uppercase tracking-[0.25em] text-secondary dark:text-blue-400">
             {project.category}
           </span>
         </div>
 
-        {/* 3. Project Title */}
-        <h3 className="text-xl sm:text-2xl font-bold text-on-primary-fixed dark:text-white mb-3 tracking-tight line-clamp-2">
+        {/* 3. Project Title (Fixed 2-line height for visual consistency across cards) */}
+        <h3 className="text-xl sm:text-2xl font-bold text-on-primary-fixed dark:text-white mb-3 tracking-tight line-clamp-2 min-h-[3.5rem] sm:min-h-[4rem] flex items-start">
           {project.title}
         </h3>
 
-        {/* 4. Project Description */}
-        <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed mb-5 flex-grow">
+        {/* 4. Project Description (Fixed 3-line height for visual consistency) */}
+        <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed mb-5 line-clamp-3 min-h-[4.5rem]">
           {project.desc1 || project.description}
         </p>
 
-        {/* 5. Project Links */}
-        <div className="flex flex-wrap items-center gap-2 mb-6">
+        {/* 5. Project Links (Consistent button height and min-height container) */}
+        <div className="flex flex-wrap items-center gap-2 mb-6 min-h-[2rem]">
           {links.live && (
             <a
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-secondary/10 dark:bg-blue-500/10 text-secondary dark:text-blue-400 border border-secondary/20 dark:border-blue-500/20 hover:bg-secondary hover:text-white dark:hover:bg-blue-500 dark:hover:text-white transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
@@ -143,8 +145,8 @@ export default function ProjectCard({ project, onMouseMove, onMouseLeave }) {
           )}
         </div>
 
-        {/* 6. Technology Stack (Tags / Badges) */}
-        <div className="mt-auto pt-5 border-t border-outline-variant/10 dark:border-slate-800/80 flex flex-wrap gap-2">
+        {/* 6. Technology Stack (Tags / Badges - pinned to bottom) */}
+        <div className="mt-auto pt-5 border-t border-outline-variant/10 dark:border-slate-800/80 flex flex-wrap gap-2 items-center min-h-[3rem]">
           {(project.tags || project.technologies || []).map((tag) => (
             <span
               key={tag}
@@ -155,6 +157,6 @@ export default function ProjectCard({ project, onMouseMove, onMouseLeave }) {
           ))}
         </div>
       </div>
-    </div>
+    </article>
   );
 }

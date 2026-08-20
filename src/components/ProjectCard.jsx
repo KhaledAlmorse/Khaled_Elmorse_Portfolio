@@ -1,190 +1,154 @@
 import React from "react";
 
-const projectHighlights = {
-  restomind: [
-    "AI-Driven Demand Prediction",
-    "Node.js, NestJS & MongoDB Backend",
-    "JWT Auth & Role-Based Access Control",
-    "External AI Service Integration",
-  ],
-  asd: [
-    "JWT Authentication",
-    "Appointment Scheduling",
-    "Behavioral Assessment Modules",
-    "Responsive UI",
-  ],
-  clinc: [
-    "Appointment Scheduling",
-    "Patient Records",
-    "Doctor Management",
-    "Role-Based Authentication",
-  ],
-  social: [
-    "500+ Simulated Users",
-    "Posts, Comments, Likes, Follows",
-    "JWT Authentication",
-    "Role-Based Authorization",
-  ],
-  hotel: [
-    "Booking Workflows",
-    "15+ RESTful APIs",
-    "3 Responsive Dashboards",
-    "30% Less Manual Booking",
-  ],
-  noteapp: [
-    "JWT Authentication",
-    "Reusable React Hooks",
-    "Optimized MongoDB Queries",
-    "Multi-User Notes",
-  ],
-  cafeteria: [
-    "CRUD-Driven Modules",
-    "User Authentication",
-    "Relational Database Design",
-    "20% Less Manual Processing",
-  ],
-  viora: [
-    "React & Vite Portfolio UI",
-    "Clean Component Structure",
-    "Smooth Page Navigation",
-    "Tailwind CSS Styling",
-  ],
-  ecommerce: [
-    "RESTful Backend Architecture",
-    "Layered MVC Design",
-    "Product Catalog & Uploads",
-    "Order & Checkout Workflows",
-  ],
-  bookstore: [
-    "RESTful Bookstore API",
-    "Middleware Request Handling",
-    "File Upload Support",
-    "Catalog & Operation Management",
-  ],
-  hotelapi: [
-    "Room Booking & Reservations",
-    "Layered Services & Models",
-    "Middleware Request Handling",
-    "Maintainable Modular Codebase",
-  ],
-  pcstore: [
-    "Vue.js & Vite Storefront",
-    "Component-Based UI",
-    "PC Parts Catalog Browsing",
-    "Tailwind CSS Responsive Layout",
-  ],
-};
+const FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80";
 
 export default function ProjectCard({ project, onMouseMove, onMouseLeave }) {
-  const highlights = projectHighlights[project.id] || [];
+  const links = project.links || project;
 
   return (
     <div
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="tilt-card bg-surface-container-lowest dark:bg-slate-950/70 p-8 rounded-2xl shadow-sm border border-outline-variant/10 dark:border-slate-700 flex flex-col h-full min-h-[560px] sm:min-h-[580px] hover:shadow-md hover:border-secondary/20 dark:hover:border-blue-400/20 transition-colors duration-300"
+      className="group tilt-card bg-surface-container-lowest dark:bg-slate-950/80 rounded-2xl shadow-sm border border-outline-variant/15 dark:border-slate-800 flex flex-col h-full overflow-hidden hover:shadow-xl hover:border-secondary/30 dark:hover:border-blue-400/30 transition-all duration-300"
     >
-      <div className="flex justify-between items-start mb-6">
-        <div className="w-14 h-14 rounded-2xl bg-secondary-fixed dark:bg-blue-500/20 flex items-center justify-center">
-          <span aria-hidden="true" className="material-symbols-outlined text-secondary dark:text-blue-400 text-3xl">
-            {project.icon}
+      {/* 1. Project Image (16:9 Aspect Ratio) */}
+      <div className="relative aspect-video w-full overflow-hidden bg-surface-container-high dark:bg-slate-900 border-b border-outline-variant/10 dark:border-slate-800">
+        <img
+          src={project.image || FALLBACK_IMAGE}
+          alt={project.title}
+          loading="lazy"
+          onError={(e) => {
+            if (e.currentTarget.src !== FALLBACK_IMAGE) {
+              e.currentTarget.src = FALLBACK_IMAGE;
+            }
+          }}
+          className="h-full w-full object-cover transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      </div>
+
+      {/* Card Content Body */}
+      <div className="p-6 sm:p-7 flex flex-col flex-1">
+        {/* 2. Project Type / Category */}
+        <div className="mb-2">
+          <span className="text-[11px] font-black uppercase tracking-[0.25em] text-secondary dark:text-blue-400">
+            {project.category}
           </span>
         </div>
-        <div className="flex items-center gap-1.5">
-          {project.live && (
+
+        {/* 3. Project Title */}
+        <h3 className="text-xl sm:text-2xl font-bold text-on-primary-fixed dark:text-white mb-3 tracking-tight line-clamp-2">
+          {project.title}
+        </h3>
+
+        {/* 4. Project Description */}
+        <p className="text-sm text-on-surface-variant dark:text-slate-300 leading-relaxed mb-5 flex-grow">
+          {project.desc1 || project.description}
+        </p>
+
+        {/* 5. Project Links */}
+        <div className="flex flex-wrap items-center gap-2 mb-6">
+          {links.live && (
             <a
-              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
-              href={project.live}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-secondary/10 dark:bg-blue-500/10 text-secondary dark:text-blue-400 border border-secondary/20 dark:border-blue-500/20 hover:bg-secondary hover:text-white dark:hover:bg-blue-500 dark:hover:text-white transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
+              href={links.live}
               target="_blank"
               rel="noopener noreferrer"
               title="Live Demo"
               aria-label={`View Live Demo for ${project.title}`}
             >
-              <span aria-hidden="true" className="material-symbols-outlined text-xl">language</span>
+              <span
+                aria-hidden="true"
+                className="material-symbols-outlined text-base"
+              >
+                language
+              </span>
+              <span>Live Demo</span>
             </a>
           )}
-          {project.github && (
+          {links.github && (
             <a
-              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
-              href={project.github}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-surface-container-low dark:bg-slate-900/80 text-on-surface-variant dark:text-slate-300 border border-outline-variant/15 dark:border-slate-800 hover:text-secondary dark:hover:text-blue-400 hover:border-secondary/30 dark:hover:border-blue-400/30 hover:bg-surface-container dark:hover:bg-slate-800 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
+              href={links.github}
               target="_blank"
               rel="noopener noreferrer"
-              title={project.frontend ? "Backend Repository" : "GitHub Repository"}
+              title={
+                links.frontend ? "Backend Repository" : "GitHub Repository"
+              }
               aria-label={`View ${project.title} Repository on GitHub`}
             >
-              <span aria-hidden="true" className="material-symbols-outlined text-xl">
-                {project.live || project.frontend || project.apiDocs ? "code" : "open_in_new"}
+              <span
+                aria-hidden="true"
+                className="material-symbols-outlined text-base"
+              >
+                {links.frontend ? "terminal" : "code"}
               </span>
+              <span>{links.frontend ? "Backend Repo" : "GitHub"}</span>
             </a>
           )}
-          {project.frontend && (
+          {links.frontend && (
             <a
-              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
-              href={project.frontend}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-surface-container-low dark:bg-slate-900/80 text-on-surface-variant dark:text-slate-300 border border-outline-variant/15 dark:border-slate-800 hover:text-secondary dark:hover:text-blue-400 hover:border-secondary/30 dark:hover:border-blue-400/30 hover:bg-surface-container dark:hover:bg-slate-800 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
+              href={links.frontend}
               target="_blank"
               rel="noopener noreferrer"
               title="Frontend Repository"
               aria-label={`View ${project.title} Frontend Repository on GitHub`}
             >
-              <span aria-hidden="true" className="material-symbols-outlined text-xl">computer</span>
+              <span
+                aria-hidden="true"
+                className="material-symbols-outlined text-base"
+              >
+                computer
+              </span>
+              <span>Frontend Repo</span>
             </a>
           )}
-          {project.apiDocs && (
+          {links.backend && (
             <a
-              className="p-1.5 rounded-lg text-on-surface-variant dark:text-slate-400 hover:text-secondary dark:hover:text-blue-400 hover:bg-surface-container dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
-              href={project.apiDocs}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-surface-container-low dark:bg-slate-900/80 text-on-surface-variant dark:text-slate-300 border border-outline-variant/15 dark:border-slate-800 hover:text-secondary dark:hover:text-blue-400 hover:border-secondary/30 dark:hover:border-blue-400/30 hover:bg-surface-container dark:hover:bg-slate-800 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
+              href={links.backend}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Backend Deployment"
+              aria-label={`View ${project.title} Backend Deployment`}
+            >
+              <span
+                aria-hidden="true"
+                className="material-symbols-outlined text-base"
+              >
+                dns
+              </span>
+              <span>Backend</span>
+            </a>
+          )}
+          {(links.postman || links.apiDocs) && (
+            <a
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-surface-container-low dark:bg-slate-900/80 text-on-surface-variant dark:text-slate-300 border border-outline-variant/15 dark:border-slate-800 hover:text-secondary dark:hover:text-blue-400 hover:border-secondary/30 dark:hover:border-blue-400/30 hover:bg-surface-container dark:hover:bg-slate-800 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:focus-visible:ring-blue-400"
+              href={links.postman || links.apiDocs}
               target="_blank"
               rel="noopener noreferrer"
               title="API Documentation"
               aria-label={`View ${project.title} API Documentation`}
             >
-              <span aria-hidden="true" className="material-symbols-outlined text-xl">description</span>
+              <span
+                aria-hidden="true"
+                className="material-symbols-outlined text-base"
+              >
+                description
+              </span>
+              <span>{links.postman ? "Postman" : "API Docs"}</span>
             </a>
           )}
-          {!project.github && !project.live && (
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-on-surface-variant dark:text-slate-400">
-              TODO: confirm repo link
-            </span>
-          )}
         </div>
-      </div>
 
-      <p className="mb-3 text-[10px] font-black uppercase tracking-[0.3em] text-on-surface-variant dark:text-slate-400">
-        {project.category}
-      </p>
-
-      <h3 className="text-2xl font-bold text-on-primary-fixed dark:text-white mb-4">
-        {project.title}
-      </h3>
-
-      <div className="space-y-4 flex-grow">
-        <p className="text-sm text-on-surface dark:text-slate-200 leading-snug">
-          {project.desc1}
-        </p>
-
-        <div className="pt-4 border-t border-outline-variant/10 dark:border-slate-700">
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-on-surface-variant dark:text-slate-400 mb-4">
-            Project Highlights
-          </p>
-          <ul className="space-y-2 text-sm text-on-surface-variant dark:text-slate-300">
-            {highlights.map((highlight) => (
-              <li key={highlight} className="flex items-start gap-3">
-                <span className="material-symbols-outlined text-secondary dark:text-blue-400 text-sm mt-0.5">
-                  check_circle
-                </span>
-                <span className="leading-snug">{highlight}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="mt-8 pt-6 border-t border-outline-variant/10 dark:border-slate-700">
-        <div className="flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
+        {/* 6. Technology Stack (Tags / Badges) */}
+        <div className="mt-auto pt-5 border-t border-outline-variant/10 dark:border-slate-800/80 flex flex-wrap gap-2">
+          {(project.tags || project.technologies || []).map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 text-xs font-bold uppercase bg-surface dark:bg-slate-800 rounded-full"
+              className="px-2.5 py-1 text-xs font-bold uppercase tracking-wider bg-surface-container dark:bg-slate-900/90 text-on-surface-variant dark:text-slate-300 border border-outline-variant/10 dark:border-slate-800 rounded-lg transition-colors"
             >
               {tag}
             </span>

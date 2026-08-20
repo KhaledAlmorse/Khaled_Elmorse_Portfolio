@@ -1,5 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ProjectsCarousel from "./ProjectsCarousel";
+
+const API_PROJECT_IMAGE = "/images/project/api-project.png";
 
 const projects = [
   {
@@ -7,6 +9,7 @@ const projects = [
     icon: "recycling",
     title: "RestoMind — AI-Powered Restaurant Waste Management Platform",
     category: "Graduation Project",
+    image: "/images/project/restoMind.png",
     github: "https://github.com/KhaledAlmorse/RestoMindAPI",
     live: "https://restomind.vercel.app/",
     frontend: "https://github.com/AhmedMohO/restomind-app",
@@ -22,6 +25,7 @@ const projects = [
     icon: "dataset",
     title: "Autism Support Platform",
     category: "Graduation Project",
+    image: "/images/project/asdSmartCare.png",
     github: "https://github.com/KhaledAlmorse/ASD_Final_Project",
     desc1:
       "Built with React.js, Node.js, Express.js, and MongoDB to support end-to-end care workflows for an autism support platform.",
@@ -34,6 +38,7 @@ const projects = [
     icon: "shopping_cart",
     title: "Clinic Appointment System",
     category: "Full Stack Application",
+    image: "/images/project/clinic.png",
     github: "https://github.com/KhaledAlmorse/Clinic-Appointment-System",
     desc1:
       "Built with Python, Django, and MySQL for appointment scheduling, patient records, doctor management, and role-based authentication.",
@@ -42,10 +47,23 @@ const projects = [
     tags: ["Python", "Django", "MySQL", "MVC", "RBAC"],
   },
   {
+    id: "viora",
+    icon: "web",
+    title: "Viora",
+    category: "Web Application",
+    image: "/images/project/viora.png",
+    github: "https://github.com/KhaledAlmorse/Viora",
+    live: "https://viora-lovat.vercel.app",
+    desc1:
+      "A modern web application built with React and Vite, featuring a responsive interface and a clean modern user experience.",
+    tags: ["React.js", "Vite", "JavaScript", "React Router", "Tailwind CSS"],
+  },
+  {
     id: "social",
     icon: "groups",
     title: "Social Media API",
     category: "API",
+    image: API_PROJECT_IMAGE,
     github: "https://github.com/KhaledAlmorse/Social-APP",
     desc1:
       "A RESTful API built with Node.js, Express.js, and MongoDB for 500+ simulated users with secure access control.",
@@ -58,6 +76,7 @@ const projects = [
     icon: "apartment",
     title: "Hotel Booking System",
     category: "Full Stack Application",
+    image: "/images/project/HotelSystem.png",
     github: "https://github.com/KhaledAlmorse/hotel-system",
     desc1:
       "A full stack booking platform built with Laravel, Vue.js, and MySQL for room reservations and customer workflows.",
@@ -70,6 +89,7 @@ const projects = [
     icon: "menu_book",
     title: "NoteWorkSpace App",
     category: "Full Stack Application",
+    image: "/images/project/note.png",
     github: "https://github.com/KhaledAlmorse/NoteWorkSpaceApp",
     desc1:
       "A collaborative multi-user notes app built with React.js, Node.js, Express.js, and MongoDB.",
@@ -78,10 +98,23 @@ const projects = [
     tags: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT"],
   },
   {
+    id: "ecommerce",
+    icon: "storefront",
+    title: "Ecommerce API",
+    category: "Backend Project",
+    image: API_PROJECT_IMAGE,
+    github: "https://github.com/KhaledAlmorse/Ecommerce_api_V2",
+    live: "https://ecommerce-api-v2-nine.vercel.app",
+    desc1:
+      "A backend e-commerce API designed to handle core online store operations, including authentication, products, users, and order-related functionality.",
+    tags: ["Node.js", "Express.js", "MongoDB", "REST API", "Auth"],
+  },
+  {
     id: "cafeteria",
     icon: "restaurant",
     title: "Cafeteria Management System",
     category: "Full Stack Application",
+    image: "/images/project/cafeteria.png",
     github: "https://github.com/KhaledAlmorse/cafeteria-project",
     desc1:
       "A PHP and MySQL system with 8+ CRUD-driven modules for handling cafeteria operations and user authentication.",
@@ -89,39 +122,44 @@ const projects = [
       "Built with relational database design to reduce manual order-processing time by 20%.",
     tags: ["PHP", "MySQL", "CRUD", "Auth"],
   },
+  {
+    id: "bookstore",
+    icon: "auto_stories",
+    title: "Book Store API",
+    category: "Backend Project",
+    image: API_PROJECT_IMAGE,
+    github: "https://github.com/KhaledAlmorse/Book_store_Api_V2",
+    live: "https://book-store-api-v2.vercel.app",
+    desc1:
+      "A RESTful backend API for a book store, providing structured endpoints for managing books and backend operations.",
+    tags: ["Node.js", "Express.js", "MongoDB", "REST API", "JWT"],
+  },
 ];
 
 export default function Projects() {
   const sectionRef = useRef(null);
-  const projectsCountRef = useRef(null);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    const section = sectionRef.current;
-    const projectsCountEl = projectsCountRef.current;
-
-    if (
-      !section ||
-      !projectsCountEl ||
-      prefersReducedMotion
-    ) {
-      if (projectsCountEl) projectsCountEl.textContent = projects.length.toString();
+    if (prefersReducedMotion) {
+      setCount(projects.length);
       return;
     }
 
     let hasAnimated = false;
-    const animate = (el, target) => {
-      const duration = 1200;
+    const animate = (target) => {
+      const duration = 1000;
       const start = performance.now();
 
       const tick = (now) => {
         const progress = Math.min((now - start) / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
         const value = Math.round(eased * target);
-        el.textContent = `${value}`;
+        setCount(value);
         if (progress < 1) {
           requestAnimationFrame(tick);
         }
@@ -134,14 +172,15 @@ export default function Projects() {
       ([entry]) => {
         if (entry.isIntersecting && !hasAnimated) {
           hasAnimated = true;
-          animate(projectsCountEl, projects.length);
+          animate(projects.length);
           observer.disconnect();
         }
       },
-      { threshold: 0.45 },
+      { threshold: 0.2 },
     );
 
-    observer.observe(section);
+    const section = sectionRef.current;
+    if (section) observer.observe(section);
 
     return () => observer.disconnect();
   }, []);
@@ -164,7 +203,7 @@ export default function Projects() {
             <div>
               <div className="bg-surface-container-lowest dark:bg-slate-950/70 border border-outline-variant/10 dark:border-slate-700 rounded-2xl px-6 py-4 text-center">
                 <p className="text-2xl sm:text-3xl font-black text-on-primary-fixed dark:text-white">
-                  <span ref={projectsCountRef}>0</span>
+                  {count}
                 </p>
                 <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.25em] text-on-surface-variant dark:text-slate-400">
                   Projects

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import profilePic from "../assets/images/2.webp";
+import profilePic from "../assets/images/myimage.png";
 import CvModal from "./CvModal";
 
 export default function Hero() {

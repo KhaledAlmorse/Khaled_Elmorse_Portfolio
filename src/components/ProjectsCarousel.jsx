@@ -89,13 +89,13 @@ export default function ProjectsCarousel({ projects }) {
         aria-roledescription="carousel"
         aria-label="Projects carousel"
       >
-        <div className="flex touch-pan-y gap-8">
+        <div className="flex touch-pan-y">
           {pages.map((page) => (
             <div
               key={page.map((project) => project.id).join("-")}
-              className="min-w-0 flex-[0_0_96%] sm:flex-[0_0_94%] lg:flex-[0_0_92%]"
+              className="min-w-0 flex-[0_0_100%] px-1"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                 {page.map((project) => (
                   <ProjectCard
                     key={project.id}
